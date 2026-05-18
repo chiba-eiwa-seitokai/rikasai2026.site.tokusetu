@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>梨花祭賞 2026 — Rikasai Award</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@300;400;500&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#d4a843;--gold-light:#f0d080;--gold-pale:#faf0d0;
+  --rose:#c9546a;--teal:#2a7a80;--teal-light:#48b0b8;
+  --cream:#fdf8f0;--ink:#1a120a;--ink-soft:#3a2818;
+  --parchment:#f5ead8;--amber:#c87820;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);font-family:"Noto Serif JP",serif;overflow-x:hidden;}
+
+/* ===== NAV ===== */
+nav{background:var(--ink);border-bottom:1px solid rgba(212,168,67,0.2);padding:0 24px;position:sticky;top:0;z-index:100;transition:box-shadow .3s;}
+nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.5);}
+.nav-inner{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:52px;}
+.nav-links{display:flex;flex:1;justify-content:center;}
+nav a{font-family:"Cinzel",serif;font-size:10px;letter-spacing:.25em;color:rgba(232,212,168,.9);text-decoration:none;padding:16px 12px;text-transform:uppercase;transition:color .3s;cursor:pointer;white-space:nowrap;position:relative;}
+nav a::after{content:"";position:absolute;bottom:0;left:50%;right:50%;height:1px;background:var(--gold);transition:left .3s,right .3s;}
+nav a:hover{color:var(--gold-light);}
+nav a:hover::after{left:20%;right:20%;}
+.nav-burger{display:none;flex-direction:column;justify-content:center;align-items:center;width:40px;height:40px;cursor:pointer;gap:5px;background:none;border:none;padding:0;margin-left:auto;}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--gold);transition:all .3s;transform-origin:center;}
+.nav-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+.nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+.nav-drawer{display:none;position:fixed;top:52px;left:0;right:0;background:rgba(26,18,10,.98);border-bottom:1px solid rgba(212,168,67,.2);z-index:99;backdrop-filter:blur(8px);transform:translateY(-10px);opacity:0;transition:transform .3s,opacity .3s;pointer-events:none;}
+.nav-drawer.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+.nav-drawer a{display:block;font-family:"Cinzel",serif;font-size:11px;letter-spacing:.25em;color:rgba(232,212,168,.9);text-decoration:none;padding:14px 24px;text-transform:uppercase;border-bottom:1px solid rgba(212,168,67,.08);transition:color .2s,background .2s;cursor:pointer;}
+.nav-drawer a:hover{color:var(--gold);background:rgba(212,168,67,.05);}
+@media(max-width:700px){.nav-links{display:none;}.nav-burger{display:flex;}.nav-drawer{display:block;}}
+
+/* ===== HERO ===== */
+.hero{min-height:56vh;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px 60px;position:relative;overflow:hidden;}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,rgba(212,168,67,.12) 0%,transparent 65%);}
+.hero-label{font-family:"Cinzel",serif;font-size:11px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:24px;opacity:.9;}
+.hero-title{font-family:"Cormorant Garamond",serif;font-size:clamp(48px,10vw,88px);font-weight:300;font-style:italic;color:var(--gold-light);letter-spacing:.1em;line-height:1;margin-bottom:16px;}
+.hero-en{font-family:"Cinzel",serif;font-size:clamp(11px,2vw,15px);letter-spacing:.4em;color:rgba(232,212,168,.5);text-transform:uppercase;margin-bottom:36px;}
+.hero-divider{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:32px;}
+.hero-line{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.hero-diamond{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);}
+.hero-catch{font-family:"Cormorant Garamond",serif;font-size:clamp(14px,2.5vw,20px);font-style:italic;color:rgba(232,212,168,.7);letter-spacing:.08em;}
+
+/* ===== COMMON ===== */
+.section-label{font-family:"Cinzel",serif;font-size:10px;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:16px;opacity:.8;}
+.section-title{font-family:"Cormorant Garamond",serif;font-size:clamp(28px,5vw,44px);font-weight:300;font-style:italic;color:var(--ink);letter-spacing:.05em;margin-bottom:8px;}
+.section-title-sub{font-family:"Cinzel",serif;font-size:10px;letter-spacing:.3em;color:rgba(58,40,24,.4);text-transform:uppercase;}
+.section-header{text-align:center;margin-bottom:56px;}
+
+/* ===== PURPOSE ===== */
+.purpose-section{background:var(--parchment);padding:80px 24px;}
+.purpose-inner{max-width:720px;margin:0 auto;}
+.purpose-text{font-size:16px;line-height:2;color:var(--ink-soft);text-align:center;margin-bottom:16px;}
+.purpose-sub{font-size:13px;line-height:2;color:rgba(58,40,24,.6);text-align:center;}
+
+/* ===== AWARDS GRID ===== */
+.awards-section{background:var(--ink);padding:80px 24px;}
+.awards-inner{max-width:960px;margin:0 auto;}
+.awards-section .section-title{color:var(--gold-light);}
+.awards-section .section-title-sub{color:rgba(240,208,128,.35);}
+.awards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-bottom:48px;}
+.award-card{border:1px solid rgba(212,168,67,.2);border-radius:2px;padding:32px 28px;position:relative;transition:border-color .3s,background .3s;}
+.award-card:hover{border-color:rgba(212,168,67,.5);background:rgba(212,168,67,.03);}
+.award-card-icon{font-size:28px;margin-bottom:16px;display:block;}
+.award-card-label{font-family:"Cinzel",serif;font-size:9px;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:10px;opacity:.7;}
+.award-card-name{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:400;font-style:italic;color:var(--gold-light);margin-bottom:16px;line-height:1.2;}
+.award-card-desc{font-size:13px;line-height:1.9;color:rgba(232,212,168,.65);}
+.award-card-points{margin-top:16px;display:flex;flex-direction:column;gap:6px;}
+.award-point{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:rgba(232,212,168,.5);line-height:1.6;}
+.award-point::before{content:"✦";color:var(--gold);opacity:.6;font-size:9px;margin-top:3px;flex-shrink:0;}
+
+/* GOLD/SILVER/BRONZE 特別カード */
+.grand-awards{border:1px solid rgba(212,168,67,.3);border-radius:2px;padding:40px 32px;background:linear-gradient(135deg,rgba(212,168,67,.05) 0%,transparent 60%);margin-top:0;}
+.grand-title{font-family:"Cinzel",serif;font-size:11px;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:32px;text-align:center;}
+.grand-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.grand-tier{text-align:center;padding:24px 16px;border:1px solid transparent;border-radius:2px;transition:border-color .3s;}
+.grand-tier:hover{border-color:rgba(212,168,67,.2);}
+.grand-crown{font-size:32px;display:block;margin-bottom:12px;}
+.grand-en{font-family:"Cinzel",serif;font-size:10px;letter-spacing:.3em;color:rgba(240,208,128,.5);text-transform:uppercase;margin-bottom:8px;}
+.grand-name{font-family:"Cormorant Garamond",serif;font-size:20px;font-weight:400;color:var(--gold-light);margin-bottom:8px;}
+.grand-detail{font-size:11px;color:rgba(232,212,168,.4);line-height:1.7;}
+@media(max-width:480px){.grand-tiers{grid-template-columns:1fr;}}
+
+/* ===== VOTE SECTION ===== */
+.vote-section{background:var(--cream);padding:80px 24px;}
+.vote-inner{max-width:860px;margin:0 auto;}
+.vote-tabs{display:flex;border-bottom:1px solid rgba(58,40,24,.15);margin-bottom:48px;gap:0;}
+.vote-tab{font-family:"Cinzel",serif;font-size:10px;letter-spacing:.3em;color:rgba(58,40,24,.4);text-transform:uppercase;padding:14px 28px;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .3s,border-color .3s;}
+.vote-tab.active{color:var(--amber);border-bottom-color:var(--amber);}
+.vote-panel{display:none;}
+.vote-panel.active{display:block;}
+.vote-card{border:1px solid rgba(58,40,24,.1);border-radius:2px;padding:36px;margin-bottom:24px;background:#fff;}
+.vote-card-head{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
+.vote-card-icon{font-size:24px;}
+.vote-card-title{font-family:"Cormorant Garamond",serif;font-size:22px;font-weight:400;font-style:italic;color:var(--ink);}
+.vote-info-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;}
+.vote-info-label{font-family:"Cinzel",serif;font-size:9px;letter-spacing:.25em;color:var(--amber);text-transform:uppercase;min-width:80px;padding-top:3px;}
+.vote-info-val{font-size:13px;line-height:1.8;color:var(--ink-soft);}
+.vote-divider{border:none;border-top:1px solid rgba(58,40,24,.08);margin:20px 0;}
+
+/* ===== CRITERIA TABLE ===== */
+.criteria-section{background:var(--parchment);padding:80px 24px;}
+.criteria-inner{max-width:860px;margin:0 auto;}
+.criteria-table{width:100%;border-collapse:collapse;}
+.criteria-table th{font-family:"Cinzel",serif;font-size:9px;letter-spacing:.3em;color:var(--amber);text-transform:uppercase;text-align:left;padding:14px 20px;border-bottom:1px solid rgba(58,40,24,.15);font-weight:400;}
+.criteria-table td{padding:20px;border-bottom:1px solid rgba(58,40,24,.07);font-size:13px;color:var(--ink-soft);line-height:1.8;vertical-align:top;}
+.criteria-table td:first-child{white-space:nowrap;font-weight:500;}
+.criteria-emoji{font-size:18px;margin-right:8px;}
+.criteria-badge{display:inline-block;font-family:"Cinzel",serif;font-size:8px;letter-spacing:.25em;padding:3px 10px;border:1px solid rgba(200,120,32,.3);color:var(--amber);text-transform:uppercase;border-radius:1px;margin-bottom:6px;}
+
+/* ===== SCHEDULE ===== */
+.schedule-section{background:var(--ink);padding:80px 24px;}
+.schedule-inner{max-width:720px;margin:0 auto;}
+.schedule-section .section-title{color:var(--gold-light);}
+.schedule-section .section-title-sub{color:rgba(240,208,128,.35);}
+.timeline{position:relative;padding-left:40px;}
+.timeline::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--gold),rgba(212,168,67,.1));}
+.tl-item{position:relative;margin-bottom:40px;}
+.tl-dot{position:absolute;left:-45px;top:4px;width:10px;height:10px;background:var(--gold);transform:rotate(45deg);}
+.tl-label{font-family:"Cinzel",serif;font-size:9px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;opacity:.8;}
+.tl-title{font-family:"Cormorant Garamond",serif;font-size:20px;font-weight:400;color:var(--gold-light);margin-bottom:6px;}
+.tl-desc{font-size:12px;line-height:1.8;color:rgba(232,212,168,.55);}
+
+/* ===== CATCHCOPY ===== */
+.catch-section{background:var(--parchment);padding:80px 24px;text-align:center;}
+.catch-quote{font-family:"Cormorant Garamond",serif;font-size:clamp(20px,4vw,34px);font-weight:300;font-style:italic;color:var(--ink-soft);line-height:1.6;letter-spacing:.05em;position:relative;display:inline-block;padding:0 40px;}
+.catch-quote::before,.catch-quote::after{content:'"';font-size:64px;color:var(--gold);opacity:.3;position:absolute;font-family:"Cormorant Garamond",serif;line-height:1;}
+.catch-quote::before{top:-8px;left:0;}
+.catch-quote::after{content:'"';bottom:-32px;right:0;}
+.catch-note{margin-top:32px;font-family:"Cinzel",serif;font-size:10px;letter-spacing:.3em;color:rgba(58,40,24,.4);}
+
+/* ===== FOOTER ===== */
+footer{background:var(--ink);padding:48px 24px;text-align:center;border-top:1px solid rgba(212,168,67,.15);}
+.footer-logo{font-family:"Cormorant Garamond",serif;font-size:24px;font-weight:300;font-style:italic;color:var(--gold-light);letter-spacing:.15em;margin-bottom:8px;}
+.footer-sub{font-family:"Cinzel",serif;font-size:9px;letter-spacing:.3em;color:rgba(232,212,168,.35);text-transform:uppercase;margin-bottom:24px;}
+.footer-links{display:flex;justify-content:center;gap:0;flex-wrap:wrap;margin-bottom:24px;}
+.footer-links a{font-family:"Cinzel",serif;font-size:9px;letter-spacing:.2em;color:rgba(232,212,168,.4);text-decoration:none;padding:8px 16px;text-transform:uppercase;cursor:pointer;transition:color .2s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-copy{font-size:11px;color:rgba(232,212,168,.2);letter-spacing:.1em;}
+
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="nav-inner">
+    <div class="nav-links">
+      <a href="index.html">ホーム</a>
+      <a href="about.html">梨花祭とは</a>
+      <a href="attractions.html">企画一覧</a>
+      <a href="map.html">マップ</a>
+      <a href="schedule.html">プログラム</a>
+      <a href="award.html" style="color:var(--gold);">梨花祭賞</a>
+      <a href="gallery.html">ギャラリー</a>
+      <a href="ticket.html">料金</a>
+    </div>
+    <button class="nav-burger" id="nav-burger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-drawer" id="nav-drawer">
+  <a href="index.html">ホーム</a>
+  <a href="about.html">梨花祭とは</a>
+  <a href="attractions.html">企画一覧</a>
+  <a href="map.html">マップ</a>
+  <a href="schedule.html">プログラム</a>
+  <a href="award.html">梨花祭賞</a>
+  <a href="gallery.html">ギャラリー</a>
+  <a href="ticket.html">料金</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-label">Rikasai Award 2026</p>
+  <h1 class="hero-title">梨花祭賞</h1>
+  <p class="hero-en">Rikasai Award</p>
+  <div class="hero-divider">
+    <div class="hero-line"></div>
+    <div class="hero-diamond"></div>
+    <div class="hero-line"></div>
+  </div>
+  <p class="hero-catch">Challenge — みんなでやろうよ梨花祭</p>
+</section>
+
+<!-- PURPOSE -->
+<section class="purpose-section">
+  <div class="purpose-inner">
+    <div class="section-header reveal">
+      <p class="section-label">About the Award</p>
+      <h2 class="section-title">梨花祭賞とは</h2>
+      <p class="section-title-sub">Purpose &amp; Concept</p>
+    </div>
+    <p class="purpose-text reveal">梨花祭の出し物の中で優れているものを決めて、表彰する賞です。</p>
+    <p class="purpose-sub reveal">
+      皆で受賞を目指して頑張るための一つの目標に。<br>
+      梨花祭で頑張ったクラスへの労いと達成感を分かち合うために。<br><br>
+      今年のテーマ「Challenge — みんなでやろうよ梨花祭」に沿い、<br>
+      来校者の皆様にも投票を通して、一緒に梨花祭を作り上げていただきます。
+    </p>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="awards-section">
+  <div class="awards-inner">
+    <div class="section-header reveal">
+      <p class="section-label">Award Categories</p>
+      <h2 class="section-title" style="color:var(--gold-light);">賞の種類</h2>
+      <p class="section-title-sub" style="color:rgba(240,208,128,.35);">Categories</p>
+    </div>
+
+    <div class="awards-grid reveal">
+      <div class="award-card">
+        <span class="award-card-icon">🍱</span>
+        <p class="award-card-label">Food &amp; Drink</p>
+        <h3 class="award-card-name">飲食賞</h3>
+        <p class="award-card-desc">全学年共通で選ばれる、飲食クラスへの賞。</p>
+        <div class="award-card-points">
+          <span class="award-point">気持ちのよい接客ができているか</span>
+          <span class="award-point">楽しませるコンセプトが明確か</span>
+          <span class="award-point">内外装でコンセプトが伝わるか</span>
+        </div>
+      </div>
+
+      <div class="award-card">
+        <span class="award-card-icon">🎡</span>
+        <p class="award-card-label">Attraction</p>
+        <h3 class="award-card-name">アトラクション賞</h3>
+        <p class="award-card-desc">各学年より選出。興味を惹く出し物への賞。</p>
+        <div class="award-card-points">
+          <span class="award-point">皆が興味を持つ出し物か</span>
+          <span class="award-point">コンセプト・世界観が明確か</span>
+          <span class="award-point">わくわくするオリジナリティがあるか</span>
+        </div>
+      </div>
+
+      <div class="award-card">
+        <span class="award-card-icon">🎨</span>
+        <p class="award-card-label">Poster</p>
+        <h3 class="award-card-name">ポスター賞</h3>
+        <p class="award-card-desc">出し物の魅力を伝えるポスターへの賞。</p>
+        <div class="award-card-points">
+          <span class="award-point">出し物の内容がひと目でわかるか</span>
+          <span class="award-point">引き付ける色使い・構成か</span>
+          <span class="award-point">出し物のコンセプトに沿っているか</span>
+        </div>
+      </div>
+
+      <div class="award-card" style="border-color:rgba(212,168,67,.35);background:rgba(212,168,67,.02);">
+        <span class="award-card-icon">✨</span>
+        <p class="award-card-label" style="opacity:1;">Decoration — New 2026</p>
+        <h3 class="award-card-name">装飾賞</h3>
+        <p class="award-card-desc">今年から新設。各学年より選出される装飾への賞。</p>
+        <div class="award-card-points">
+          <span class="award-point">コンセプトに沿った空間づくりか</span>
+          <span class="award-point">細部までこだわった雰囲気があるか</span>
+          <span class="award-point">来場者をワクワクさせる演出があるか</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAND AWARDS -->
+    <div class="grand-awards reveal">
+      <p class="grand-title">Grand Award — 今年から新設</p>
+      <div class="grand-tiers">
+        <div class="grand-tier">
+          <span class="grand-crown">🥇</span>
+          <p class="grand-en">Gold Award</p>
+          <p class="grand-name">最優秀賞</p>
+          <p class="grand-detail">接客・出し物・クオリティのすべてにおいて特に素晴らしい感動を与えたクラスへ</p>
+        </div>
+        <div class="grand-tier">
+          <span class="grand-crown">🥈</span>
+          <p class="grand-en">Silver Award</p>
+          <p class="grand-name">優秀賞</p>
+          <p class="grand-detail">総合的に高い評価を得た、輝かしい成果を残したクラスへ</p>
+        </div>
+        <div class="grand-tier">
+          <span class="grand-crown">🥉</span>
+          <p class="grand-en">Bronze Award</p>
+          <p class="grand-name">優良賞</p>
+          <p class="grand-detail">各部門で優れた取り組みと努力が光ったクラスへ</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOTE -->
+<section class="vote-section">
+  <div class="vote-inner">
+    <div class="section-header reveal">
+      <p class="section-label">How to Vote</p>
+      <h2 class="section-title">投票方法</h2>
+      <p class="section-title-sub">Voting Guide</p>
+    </div>
+
+    <div class="vote-tabs reveal">
+      <div class="vote-tab active" onclick="switchTab('visitor')">来校者の方</div>
+      <div class="vote-tab" onclick="switchTab('student')">在校生の方</div>
+    </div>
+
+    <div class="vote-panel active" id="tab-visitor">
+      <div class="vote-card reveal">
+        <div class="vote-card-head">
+          <span class="vote-card-icon">🏷️</span>
+          <h3 class="vote-card-title">シール投票</h3>
+        </div>
+        <div class="vote-info-row">
+          <span class="vote-info-label">方法</span>
+          <span class="vote-info-val">入場時にシールを1枚お受け取りいただき、受付後方に設置された投票ボードの「気に入ったクラス」の欄にシールを貼ってください。</span>
+        </div>
+        <hr class="vote-divider">
+        <div class="vote-info-row">
+          <span class="vote-info-label">投票対象</span>
+          <span class="vote-info-val">全学年の中からお気に入りの出し物を<strong>1クラス</strong>選んで投票</span>
+        </div>
+        <div class="vote-info-row">
+          <span class="vote-info-label">投票期間</span>
+          <span class="vote-info-val">梨花祭当日（7月17日・18日）</span>
+        </div>
+        <div class="vote-info-row">
+          <span class="vote-info-label">審査基準</span>
+          <span class="vote-info-val">接客のよさ・興味が湧く出し物・コンセプトのおもしろさ</span>
+        </div>
+        <div class="vote-info-row">
+          <span class="vote-info-label">投票場所</span>
+          <span class="vote-info-val">受付後方の投票ボード（入口付近にQRコードも設置予定）</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="vote-panel" id="tab-student">
+      <div class="vote-card reveal">
+        <div class="vote-card-head">
+          <span class="vote-card-icon">📋</span>
+          <h3 class="vote-card-title">フォーム投票</h3>
+        </div>
+        <div class="vote-info-row">
+          <span class="vote-info-label">方法</span>
+          <span class="vote-info-val">各クラスに貼られているQRコードを読み取り、Googleフォームから投票します。</span>
+        </div>
+        <hr class="vote-divider">
+        <div class="vote-info-row">
+          <span class="vote-info-label">投票対象</span>
+          <span class="vote-info-val">アトラクション・飲食など出し物の部門に加え、<strong>装飾・ポスターは別途</strong>投票</span>
+        </div>
+        <div class="vote-info-row">
+          <span class="vote-info-label">投票期間</span>
+          <span class="vote-info-val">梨花祭当日（7月17日・18日）〜 7月24日</span>
+        </div>
+        <div class="vote-info-row">
+          <span class="vote-info-label">審査基準</span>
+          <span class="vote-info-val">各部門の審査ポイントをもとに、すべてを総合的に評価</span>
+        </div>
+        <div class="vote-info-row">
+          <span class="vote-info-label">備考</span>
+          <span class="vote-info-val">フォームは必須回答なし。答えやすい形式で実施予定</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRITERIA -->
+<section class="criteria-section">
+  <div class="criteria-inner">
+    <div class="section-header reveal">
+      <p class="section-label">Judging Criteria</p>
+      <h2 class="section-title">審査基準</h2>
+      <p class="section-title-sub">What We Look For</p>
+    </div>
+    <div class="reveal" style="overflow-x:auto;">
+      <table class="criteria-table">
+        <thead>
+          <tr>
+            <th style="width:160px;">部門</th>
+            <th>審査のポイント</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="criteria-emoji">🍱</span>飲食賞</td>
+            <td>
+              <span class="criteria-badge">接客</span><br>
+              気持ちのよい接客・いつでも対応できる準備が整っているか<br>
+              <span class="criteria-badge">コンセプト</span><br>
+              飲食物と一緒に楽しめる工夫があるか。内外装でコンセプトが伝わるか
+            </td>
+          </tr>
+          <tr>
+            <td><span class="criteria-emoji">🎡</span>アトラクション賞</td>
+            <td>
+              <span class="criteria-badge">魅力</span><br>
+              ぱっと見で内容がわかり、わくわくする演出があるか<br>
+              <span class="criteria-badge">コンセプト</span><br>
+              オリジナリティがあり、コンセプトが内外装から伝わるか
+            </td>
+          </tr>
+          <tr>
+            <td><span class="criteria-emoji">🎨</span>ポスター賞</td>
+            <td>
+              <span class="criteria-badge">デザイン</span><br>
+              出し物の内容がひと目でわかるデザインになっているか<br>
+              <span class="criteria-badge">色・構成</span><br>
+              目を引く色使いや引き付けるレイアウトになっているか
+            </td>
+          </tr>
+          <tr>
+            <td><span class="criteria-emoji">✨</span>装飾賞<br><span style="font-size:11px;color:var(--amber);font-family:'Cinzel',serif;letter-spacing:.1em;">New 2026</span></td>
+            <td>
+              <span class="criteria-badge">雰囲気</span><br>
+              コンセプトに沿った、ワクワクする空間づくりができているか<br>
+              <span class="criteria-badge">こだわり</span><br>
+              細部まで作り込まれた、統一感のある装飾になっているか
+            </td>
+          </tr>
+          <tr>
+            <td><span class="criteria-emoji">🏆</span>最優秀・優秀・優良賞</td>
+            <td>
+              <span class="criteria-badge">総合評価</span><br>
+              接客・出し物・クオリティのすべてにおいて特に素晴らしい感動を与えたか。各部門を超えて「最高に輝いていたクラス」
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section class="schedule-section">
+  <div class="schedule-inner">
+    <div class="section-header reveal">
+      <p class="section-label">Schedule</p>
+      <h2 class="section-title" style="color:var(--gold-light);">スケジュール</h2>
+      <p class="section-title-sub" style="color:rgba(240,208,128,.35);">Award Timeline</p>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-label">7月7日ごろ</p>
+        <h3 class="tl-title">梨花祭賞 告知開始</h3>
+        <p class="tl-desc">インスタグラム・学校ホームページ等で告知。文化祭10日前・3日前にも告知予定。</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-label">7月17日（金）・18日（土）</p>
+        <h3 class="tl-title">投票期間（当日）</h3>
+        <p class="tl-desc">来校者：受付後方の投票ボードにてシール投票<br>在校生：フォームにてQRコードから投票開始</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-label">7月24日</p>
+        <h3 class="tl-title">在校生フォーム投票 締切</h3>
+        <p class="tl-desc">フォーム投票はこの日までに回答をお願いします。</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <p class="tl-label">発表日 調整中</p>
+        <h3 class="tl-title">梨花祭賞 発表・表彰</h3>
+        <p class="tl-desc">礼拝等の機会に結果を発表予定。受賞クラスは記念撮影も行います。詳細は先生と相談の上、追ってお知らせします。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATCHCOPY -->
+<section class="catch-section">
+  <div class="reveal">
+    <p class="catch-quote">あなたのお気に入りの物語を<br>探してみてください</p>
+    <p class="catch-note" style="margin-top:48px;">— Rikasai Award 2026 Catchcopy</p>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-logo">梨花祭 2026</p>
+  <p class="footer-sub">Chiba Eiwa High School Cultural Festival</p>
+  <div class="footer-links">
+    <a href="index.html">ホーム</a>
+    <a href="attractions.html">企画一覧</a>
+    <a href="schedule.html">プログラム</a>
+    <a href="award.html">梨花祭賞</a>
+    <a href="ticket.html">料金</a>
+  </div>
+  <p class="footer-copy">© 2026 梨花祭実行委員会 · 千葉英和高等学校生徒会</p>
+</footer>
+
+<script>
+// ===== NAV =====
+const burger=document.getElementById('nav-burger');
+const drawer=document.getElementById('nav-drawer');
+const mainNav=document.getElementById('main-nav');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');drawer.classList.toggle('open');});
+document.addEventListener('click',(e)=>{if(!mainNav.contains(e.target)&&!drawer.contains(e.target)){burger.classList.remove('open');drawer.classList.remove('open');}});
+window.addEventListener('scroll',()=>{mainNav.classList.toggle('scrolled',window.scrollY>10);},{passive:true});
+
+// ===== VOTE TABS =====
+function switchTab(id){
+  document.querySelectorAll('.vote-tab').forEach((t,i)=>{
+    t.classList.toggle('active',['visitor','student'][i]===id);
+  });
+  document.querySelectorAll('.vote-panel').forEach(p=>{p.classList.remove('active');});
+  document.getElementById('tab-'+id).classList.add('active');
+}
+
+// ===== REVEAL =====
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
