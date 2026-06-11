@@ -15,6 +15,7 @@ type EventItem = {
   info: { k: string; v: string }[];
   day1: boolean;
   day2: boolean;
+  thumbUrl: string | null;
 };
 
 const TYPE_COLOR: Record<string, string> = {
@@ -56,8 +57,10 @@ export default function AttractionsClient({ events }: { events: EventItem[] }) {
         .card{border:1px solid rgba(201,169,110,0.25);background:var(--parchment);position:relative;overflow:hidden;display:flex;flex-direction:column;transition:transform 0.3s,box-shadow 0.3s;cursor:pointer;text-decoration:none;color:inherit;}
         .card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;z-index:1;}
         .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(45,74,62,0.12);}
-        .card-thumb{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:56px;background:linear-gradient(135deg,rgba(42,122,128,0.1),rgba(212,168,67,0.08));position:relative;}
-        .card-thumb-badge{position:absolute;bottom:8px;right:8px;font-family:"Cinzel",serif;font-size:8px;letter-spacing:0.15em;padding:3px 9px;font-weight:600;}
+        .card-thumb{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;font-size:56px;background:linear-gradient(135deg,rgba(42,122,128,0.1),rgba(212,168,67,0.08));position:relative;overflow:hidden;}
+        .card-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+        .card-thumb-emoji{position:relative;z-index:1;}
+        .card-thumb-badge{position:absolute;bottom:8px;right:8px;font-family:"Cinzel",serif;font-size:8px;letter-spacing:0.15em;padding:3px 9px;font-weight:600;z-index:2;}
         .card-body{padding:20px 18px 16px;}
         .card-number{font-family:"Cormorant Garamond",serif;font-size:40px;font-weight:300;color:rgba(201,169,110,0.12);position:absolute;top:8px;right:12px;line-height:1;}
         .card-grade{font-family:"Cinzel",serif;font-size:9px;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase;margin-bottom:6px;}
@@ -100,7 +103,11 @@ export default function AttractionsClient({ events }: { events: EventItem[] }) {
               <Link key={e.id} href={`/attractions/${e.id}`} className="card" style={{ "--card-color": color } as React.CSSProperties}>
                 <style>{`.card[href="/attractions/${e.id}"]::before { background: ${color}; }`}</style>
                 <div className="card-thumb">
-                  <span>{e.emoji}</span>
+                  {e.thumbUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={e.thumbUrl} alt={e.title} />
+                  )}
+                  <span className="card-thumb-emoji" style={{ opacity: e.thumbUrl ? 0 : 1 }}>{e.emoji}</span>
                   <span className="card-thumb-badge" style={{ background: `${color}22`, color, border: `1px solid ${color}44` }}>{e.type}</span>
                 </div>
                 <div className="card-body">
