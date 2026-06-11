@@ -37,29 +37,34 @@ export async function GET(request: NextRequest) {
   const day = searchParams.get("day");
   const all = searchParams.get("all") === "true" && checkAdminAuth(request);
 
-  const events = await prisma.event.findMany({
-    where: {
-      published: all ? undefined : true,
-      ...(type ? { type } : {}),
-      ...(day === "1" ? { day1: true } : {}),
-      ...(day === "2" ? { day2: true } : {}),
-    },
-    orderBy: { sortOrder: "asc" },
-  });
+  try {
+    const events = await prisma.event.findMany({
+      where: {
+        published: all ? undefined : true,
+        ...(type ? { type } : {}),
+        ...(day === "1" ? { day1: true } : {}),
+        ...(day === "2" ? { day2: true } : {}),
+      },
+      orderBy: { sortOrder: "asc" },
+    });
 
-  let result = events.map(parseEvent);
+    let result = events.map(parseEvent);
 
-  if (q) {
-    result = result.filter(
-      (e) =>
-        e.title.toLowerCase().includes(q) ||
-        e.grade.toLowerCase().includes(q) ||
-        e.desc.toLowerCase().includes(q) ||
-        e.tags.some((t) => t.toLowerCase().includes(q))
-    );
+    if (q) {
+      result = result.filter(
+        (e) =>
+          e.title.toLowerCase().includes(q) ||
+          e.grade.toLowerCase().includes(q) ||
+          e.desc.toLowerCase().includes(q) ||
+          e.tags.some((t) => t.toLowerCase().includes(q))
+      );
+    }
+
+    return NextResponse.json(result);
+  } catch (err) {
+    console.error("[API /events GET]", err);
+    return NextResponse.json({ error: "Database error", detail: String(err) }, { status: 500 });
   }
-
-  return NextResponse.json(result);
 }
 
 export async function POST(request: NextRequest) {
@@ -67,26 +72,31 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await request.json();
-  const event = await prisma.event.create({
-    data: {
-      num: body.num,
-      grade: body.grade,
-      title: body.title,
-      type: body.type,
-      emoji: body.emoji ?? "🎉",
-      desc: body.desc,
-      tags: JSON.stringify(body.tags ?? []),
-      infoJson: JSON.stringify(body.info ?? []),
-      galleryJson: JSON.stringify(body.gallery ?? []),
-      thumbUrl: body.thumbUrl ?? null,
-      heroImgUrl: body.heroImgUrl ?? null,
-      day1: body.day1 ?? true,
-      day2: body.day2 ?? true,
-      published: body.published ?? true,
-      sortOrder: body.sortOrder ?? 0,
-    },
-  });
+  try {
+    const body = await request.json();
+    const event = await prisma.event.create({
+      data: {
+        num: body.num,
+        grade: body.grade,
+        title: body.title,
+        type: body.type,
+        emoji: body.emoji ?? "🎉",
+        desc: body.desc,
+        tags: JSON.stringify(body.tags ?? []),
+        infoJson: JSON.stringify(body.info ?? []),
+        galleryJson: JSON.stringify(body.gallery ?? []),
+        thumbUrl: body.thumbUrl ?? null,
+        heroImgUrl: body.heroImgUrl ?? null,
+        day1: body.day1 ?? true,
+        day2: body.day2 ?? true,
+        published: body.published ?? true,
+        sortOrder: body.sortOrder ?? 0,
+      },
+    });
 
-  return NextResponse.json(parseEvent(event), { status: 201 });
+    return NextResponse.json(parseEvent(event), { status: 201 });
+  } catch (err) {
+    console.error("[API /events POST]", err);
+    return NextResponse.json({ error: "Database error", detail: String(err) }, { status: 500 });
+  }
 }

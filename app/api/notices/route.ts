@@ -7,12 +7,17 @@ export async function GET(request: NextRequest) {
     request.nextUrl.searchParams.get("all") === "true" &&
     checkAdminAuth(request);
 
-  const notices = await prisma.notice.findMany({
-    where: { published: all ? undefined : true },
-    orderBy: { sortOrder: "asc" },
-  });
+  try {
+    const notices = await prisma.notice.findMany({
+      where: { published: all ? undefined : true },
+      orderBy: { sortOrder: "asc" },
+    });
 
-  return NextResponse.json(notices);
+    return NextResponse.json(notices);
+  } catch (err) {
+    console.error("[API /notices GET]", err);
+    return NextResponse.json({ error: "Database error", detail: String(err) }, { status: 500 });
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -20,17 +25,22 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await request.json();
-  const notice = await prisma.notice.create({
-    data: {
-      badge: body.badge ?? "INFO",
-      text: body.text,
-      linkUrl: body.linkUrl ?? null,
-      linkLabel: body.linkLabel ?? null,
-      published: body.published ?? true,
-      sortOrder: body.sortOrder ?? 0,
-    },
-  });
+  try {
+    const body = await request.json();
+    const notice = await prisma.notice.create({
+      data: {
+        badge: body.badge ?? "INFO",
+        text: body.text,
+        linkUrl: body.linkUrl ?? null,
+        linkLabel: body.linkLabel ?? null,
+        published: body.published ?? true,
+        sortOrder: body.sortOrder ?? 0,
+      },
+    });
 
-  return NextResponse.json(notice, { status: 201 });
+    return NextResponse.json(notice, { status: 201 });
+  } catch (err) {
+    console.error("[API /notices POST]", err);
+    return NextResponse.json({ error: "Database error", detail: String(err) }, { status: 500 });
+  }
 }
