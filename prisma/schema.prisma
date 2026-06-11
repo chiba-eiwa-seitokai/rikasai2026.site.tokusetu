@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  num         String
+  grade       String
+  title       String
+  type        String
+  emoji       String   @default("🎉")
+  desc        String
+  tags        String
+  infoJson    String
+  thumbUrl    String?
+  heroImgUrl  String?
+  galleryJson String   @default("[]")
+  day1        Boolean  @default(true)
+  day2        Boolean  @default(true)
+  published   Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Notice {
+  id        String   @id @default(cuid())
+  badge     String   @default("INFO")
+  text      String
+  linkUrl   String?
+  linkLabel String?
+  published Boolean  @default(true)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
