@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useAuth } from "../layout";
+import { useAuth } from "../auth-context";
 
 type Event = {
   id: string;
