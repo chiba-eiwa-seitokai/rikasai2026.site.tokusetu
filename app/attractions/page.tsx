@@ -1,13 +1,19 @@
 import { prisma } from "@/lib/prisma";
 import AttractionsClient from "@/components/attractions/AttractionsClient";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function AttractionsPage() {
-  const raw = await prisma.event.findMany({
-    where: { published: true },
-    orderBy: { sortOrder: "asc" },
-  });
+  const raw = await (async () => {
+    try {
+      return await prisma.event.findMany({
+        where: { published: true },
+        orderBy: { sortOrder: "asc" },
+      });
+    } catch {
+      return [];
+    }
+  })();
   const events = raw.map((e) => ({
     id: e.id,
     num: e.num,

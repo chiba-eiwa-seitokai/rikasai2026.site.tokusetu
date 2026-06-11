@@ -1,12 +1,9 @@
 "use client";
 
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import "@/styles/globals.css";
-
-type AuthCtx = { token: string; logout: () => void };
-export const AuthContext = createContext<AuthCtx>({ token: "", logout: () => {} });
-export function useAuth() { return useContext(AuthContext); }
+import { AuthContext } from "./auth-context";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
