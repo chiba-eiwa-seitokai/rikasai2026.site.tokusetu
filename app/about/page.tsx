@@ -58,15 +58,15 @@ export default function AboutPage() {
             </div>
             <div className="info-card">
               <p className="info-card-label">時間</p>
-              <p className="info-card-value">9:00〜16:00<br />（最終日は15:30終了）</p>
+              <p className="info-card-value">受付 9:30〜 / 公開終了 14:00<br />（入場締切 13:30）</p>
             </div>
             <div className="info-card">
               <p className="info-card-label">場所</p>
-              <p className="info-card-value">千葉英和高等学校<br />〒274-0063 千葉県船橋市習志野台8-34-1</p>
+              <p className="info-card-value">千葉英和高等学校<br />〒276-0028 千葉県八千代市村上709-1</p>
             </div>
             <div className="info-card">
               <p className="info-card-label">入場</p>
-              <p className="info-card-value">招待制（保護者・招待状お持ちの方）<br />入場無料</p>
+              <p className="info-card-value">7/17（金）関係者公開<br />7/18（土）一般公開<br />入場無料</p>
             </div>
           </div>
         </div>

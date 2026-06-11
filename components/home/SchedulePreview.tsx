@@ -3,19 +3,20 @@
 import { useState } from "react";
 
 const DAY1 = [
-  { time: "9:00", tag: "OPEN", tagClass: "tag-open", name: "開場・受付開始", detail: "正門より入場 / QRコードをご用意ください" },
+  { time: "9:30", tag: "OPEN", tagClass: "tag-open", name: "開場・受付開始", detail: "正門より入場 / QRコードをご用意ください" },
   { time: "10:00", tag: "MAIN", tagClass: "tag-main", name: "開会式・オープニングセレモニー", detail: "体育館 大ホール" },
   { time: "10:30", tag: "OPEN", tagClass: "tag-open", name: "各クラス・部活展示 開始", detail: "全教室・グラウンド" },
   { time: "13:00", tag: "MAIN", tagClass: "tag-main", name: "ステージ発表 第一部", detail: "体育館 大ホール" },
-  { time: "16:00", tag: "CLOSE", tagClass: "tag-close", name: "Day 1 終了", detail: "翌日もお楽しみに" },
+  { time: "13:30", tag: "CLOSE", tagClass: "tag-close", name: "入場締切", detail: "以降の入場はできません" },
+  { time: "14:00", tag: "CLOSE", tagClass: "tag-close", name: "公開終了（関係者公開）", detail: "ありがとうございました" },
 ];
 
 const DAY2 = [
-  { time: "9:00", tag: "OPEN", tagClass: "tag-open", name: "開場", detail: "正門より入場" },
+  { time: "9:30", tag: "OPEN", tagClass: "tag-open", name: "開場・受付開始", detail: "正門より入場" },
   { time: "10:30", tag: "OPEN", tagClass: "tag-open", name: "各クラス・部活展示", detail: "全教室・グラウンド" },
   { time: "13:00", tag: "MAIN", tagClass: "tag-main", name: "ステージ発表 第二部", detail: "体育館 大ホール" },
-  { time: "15:00", tag: "MAIN", tagClass: "tag-main", name: "閉会式・フィナーレ", detail: "体育館 大ホール" },
-  { time: "15:30", tag: "CLOSE", tagClass: "tag-close", name: "梨花祭2026 終了", detail: "ありがとうございました" },
+  { time: "13:30", tag: "CLOSE", tagClass: "tag-close", name: "入場締切", detail: "以降の入場はできません" },
+  { time: "14:00", tag: "CLOSE", tagClass: "tag-close", name: "公開終了", detail: "ありがとうございました" },
 ];
 
 export default function SchedulePreview() {
@@ -51,8 +52,8 @@ export default function SchedulePreview() {
             <p className="section-title-jp" style={{ color: "rgba(232,212,168,0.4)" }}>Two-Day Program</p>
           </div>
           <div className="schedule-tabs reveal">
-            <button className={`tab-btn${day === 0 ? " active" : ""}`} onClick={() => setDay(0)}>DAY 1 · 7/17</button>
-            <button className={`tab-btn${day === 1 ? " active" : ""}`} onClick={() => setDay(1)}>DAY 2 · 7/18</button>
+            <button className={`tab-btn${day === 0 ? " active" : ""}`} onClick={() => setDay(0)}>DAY 1 · 7/17 関係者</button>
+            <button className={`tab-btn${day === 1 ? " active" : ""}`} onClick={() => setDay(1)}>DAY 2 · 7/18 一般</button>
           </div>
           <div className="schedule-timeline">
             {items.map((item, i) => (
