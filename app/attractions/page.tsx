@@ -26,6 +26,7 @@ export default async function AttractionsPage() {
     info: JSON.parse(e.infoJson) as { k: string; v: string }[],
     day1: e.day1,
     day2: e.day2,
+    thumbUrl: e.thumbUrl ?? null,
   }));
 
   return (
