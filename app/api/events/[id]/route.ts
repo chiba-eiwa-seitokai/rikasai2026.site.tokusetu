@@ -34,9 +34,14 @@ export async function GET(
   _request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const event = await prisma.event.findUnique({ where: { id: params.id } });
-  if (!event) return NextResponse.json({ error: "Not found" }, { status: 404 });
-  return NextResponse.json(parseEvent(event));
+  try {
+    const event = await prisma.event.findUnique({ where: { id: params.id } });
+    if (!event) return NextResponse.json({ error: "Not found" }, { status: 404 });
+    return NextResponse.json(parseEvent(event));
+  } catch (err) {
+    console.error("[API /events/:id GET]", err);
+    return NextResponse.json({ error: "Database error", detail: String(err) }, { status: 500 });
+  }
 }
 
 export async function PUT(
@@ -47,29 +52,34 @@ export async function PUT(
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body = await request.json();
-  const event = await prisma.event.update({
-    where: { id: params.id },
-    data: {
-      ...(body.num !== undefined ? { num: body.num } : {}),
-      ...(body.grade !== undefined ? { grade: body.grade } : {}),
-      ...(body.title !== undefined ? { title: body.title } : {}),
-      ...(body.type !== undefined ? { type: body.type } : {}),
-      ...(body.emoji !== undefined ? { emoji: body.emoji } : {}),
-      ...(body.desc !== undefined ? { desc: body.desc } : {}),
-      ...(body.tags !== undefined ? { tags: JSON.stringify(body.tags) } : {}),
-      ...(body.info !== undefined ? { infoJson: JSON.stringify(body.info) } : {}),
-      ...(body.gallery !== undefined ? { galleryJson: JSON.stringify(body.gallery) } : {}),
-      ...(body.thumbUrl !== undefined ? { thumbUrl: body.thumbUrl } : {}),
-      ...(body.heroImgUrl !== undefined ? { heroImgUrl: body.heroImgUrl } : {}),
-      ...(body.day1 !== undefined ? { day1: body.day1 } : {}),
-      ...(body.day2 !== undefined ? { day2: body.day2 } : {}),
-      ...(body.published !== undefined ? { published: body.published } : {}),
-      ...(body.sortOrder !== undefined ? { sortOrder: body.sortOrder } : {}),
-    },
-  });
+  try {
+    const body = await request.json();
+    const event = await prisma.event.update({
+      where: { id: params.id },
+      data: {
+        ...(body.num !== undefined ? { num: body.num } : {}),
+        ...(body.grade !== undefined ? { grade: body.grade } : {}),
+        ...(body.title !== undefined ? { title: body.title } : {}),
+        ...(body.type !== undefined ? { type: body.type } : {}),
+        ...(body.emoji !== undefined ? { emoji: body.emoji } : {}),
+        ...(body.desc !== undefined ? { desc: body.desc } : {}),
+        ...(body.tags !== undefined ? { tags: JSON.stringify(body.tags) } : {}),
+        ...(body.info !== undefined ? { infoJson: JSON.stringify(body.info) } : {}),
+        ...(body.gallery !== undefined ? { galleryJson: JSON.stringify(body.gallery) } : {}),
+        ...(body.thumbUrl !== undefined ? { thumbUrl: body.thumbUrl } : {}),
+        ...(body.heroImgUrl !== undefined ? { heroImgUrl: body.heroImgUrl } : {}),
+        ...(body.day1 !== undefined ? { day1: body.day1 } : {}),
+        ...(body.day2 !== undefined ? { day2: body.day2 } : {}),
+        ...(body.published !== undefined ? { published: body.published } : {}),
+        ...(body.sortOrder !== undefined ? { sortOrder: body.sortOrder } : {}),
+      },
+    });
 
-  return NextResponse.json(parseEvent(event));
+    return NextResponse.json(parseEvent(event));
+  } catch (err) {
+    console.error("[API /events/:id PUT]", err);
+    return NextResponse.json({ error: "Database error", detail: String(err) }, { status: 500 });
+  }
 }
 
 export async function DELETE(
@@ -80,6 +90,11 @@ export async function DELETE(
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  await prisma.event.delete({ where: { id: params.id } });
-  return NextResponse.json({ success: true });
+  try {
+    await prisma.event.delete({ where: { id: params.id } });
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error("[API /events/:id DELETE]", err);
+    return NextResponse.json({ error: "Database error", detail: String(err) }, { status: 500 });
+  }
 }
