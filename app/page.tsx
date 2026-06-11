@@ -186,21 +186,21 @@ export default async function Home() {
         </div>
         <div className="access-grid">
           <div className="access-card">
-            <p className="access-card-title">By Train</p>
+            <p className="access-card-title">By Train &amp; Bus</p>
             <div className="access-item">
-              <span className="access-item-label">JR</span>
-              <span>船橋駅よりバス約15分「千葉英和高校前」下車徒歩1分</span>
+              <span className="access-item-label">京成・東葉</span>
+              <span>「勝田台」駅・「東葉勝田台」駅 南口より東洋バス「米本団地」行き乗車 約10分</span>
             </div>
             <div className="access-item">
-              <span className="access-item-label">東武</span>
-              <span>新船橋駅より徒歩約12分</span>
+              <span className="access-item-label">バス停</span>
+              <span>「千葉英和高校前」下車 徒歩5分</span>
             </div>
           </div>
           <div className="access-card">
             <p className="access-card-title">Address</p>
             <div className="access-item">
               <span className="access-item-label">住所</span>
-              <span>〒274-0063 千葉県船橋市習志野台8-34-1</span>
+              <span>〒276-0028 千葉県八千代市村上709-1</span>
             </div>
             <div className="access-item">
               <span className="access-item-label">駐車場</span>
