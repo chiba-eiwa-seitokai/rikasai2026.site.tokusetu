@@ -22,6 +22,7 @@ export default async function EventDetailPage({
     ...raw,
     tags: JSON.parse(raw.tags) as string[],
     info: JSON.parse(raw.infoJson) as { k: string; v: string }[],
+    gallery: JSON.parse(raw.galleryJson) as string[],
   };
 
   const color = TYPE_COLOR[e.type] ?? "#d4a843";
@@ -29,6 +30,7 @@ export default async function EventDetailPage({
   return (
     <>
       <style>{`
+        .detail-hero-img{width:100%;max-height:480px;object-fit:cover;display:block;}
         .detail-hero{background:var(--ink);padding:80px 24px 60px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid rgba(212,168,67,0.15);}
         .detail-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,169,110,0.06) 0%,transparent 70%);}
         .detail-hero-emoji{font-size:72px;margin-bottom:24px;position:relative;}
@@ -43,9 +45,16 @@ export default async function EventDetailPage({
         .detail-info-val{font-size:13px;color:var(--ink-soft);line-height:1.6;}
         .detail-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:40px;}
         .detail-tag{font-family:"Cinzel",serif;font-size:9px;letter-spacing:0.15em;border:1px solid rgba(201,169,110,0.3);color:rgba(58,40,24,0.6);padding:4px 12px;text-transform:uppercase;}
+        .detail-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:40px;}
+        .detail-gallery img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;}
         .detail-back{display:inline-block;font-family:"Cinzel",serif;font-size:9px;letter-spacing:0.25em;color:var(--gold);text-decoration:none;border:1px solid rgba(212,168,67,0.4);padding:10px 24px;text-transform:uppercase;transition:background 0.2s,color 0.2s;}
         .detail-back:hover{background:var(--gold);color:var(--ink);}
       `}</style>
+
+      {e.heroImgUrl && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={e.heroImgUrl} alt={e.title} className="detail-hero-img" />
+      )}
 
       <section className="detail-hero">
         <p className="detail-hero-emoji">{e.emoji}</p>
@@ -70,6 +79,15 @@ export default async function EventDetailPage({
           <div className="detail-tags">
             {e.tags.map((tag) => (
               <span key={tag} className="detail-tag">{tag}</span>
+            ))}
+          </div>
+        )}
+
+        {e.gallery.length > 0 && (
+          <div className="detail-gallery">
+            {e.gallery.map((url, i) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={i} src={url} alt={`${e.title} ${i + 1}`} />
             ))}
           </div>
         )}

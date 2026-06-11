@@ -45,6 +45,20 @@ export default function AdminNoticesPage() {
     load();
   }
 
+  async function moveSortOrder(id: string, direction: "up" | "down") {
+    const sorted = [...notices].sort((a, b) => a.sortOrder - b.sortOrder);
+    const idx = sorted.findIndex((n) => n.id === id);
+    const swapIdx = direction === "up" ? idx - 1 : idx + 1;
+    if (swapIdx < 0 || swapIdx >= sorted.length) return;
+    const a = sorted[idx];
+    const b = sorted[swapIdx];
+    await Promise.all([
+      fetch(`/api/notices/${a.id}`, { method: "PUT", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, body: JSON.stringify({ sortOrder: b.sortOrder }) }),
+      fetch(`/api/notices/${b.id}`, { method: "PUT", headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }, body: JSON.stringify({ sortOrder: a.sortOrder }) }),
+    ]);
+    load();
+  }
+
   return (
     <div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32 }}>
@@ -57,6 +71,7 @@ export default function AdminNoticesPage() {
         <table className="admin-table">
           <thead>
             <tr>
+              <th style={{ width: 60 }}>順</th>
               <th>種別</th>
               <th>内容</th>
               <th>公開</th>
@@ -66,6 +81,12 @@ export default function AdminNoticesPage() {
           <tbody>
             {notices.map((n) => (
               <tr key={n.id}>
+                <td>
+                  <div style={{ display: "flex", gap: 2 }}>
+                    <button onClick={() => moveSortOrder(n.id, "up")} className="admin-btn" style={{ fontSize: 10, padding: "2px 7px", borderColor: "#333", color: "rgba(212,168,67,0.5)", lineHeight: 1 }}>↑</button>
+                    <button onClick={() => moveSortOrder(n.id, "down")} className="admin-btn" style={{ fontSize: 10, padding: "2px 7px", borderColor: "#333", color: "rgba(212,168,67,0.5)", lineHeight: 1 }}>↓</button>
+                  </div>
+                </td>
                 <td>
                   <span className={`admin-badge admin-badge-${n.badge.toLowerCase()}`}>{n.badge}</span>
                 </td>
@@ -80,7 +101,7 @@ export default function AdminNoticesPage() {
                     {n.published ? "公開中" : "非公開"}
                   </button>
                 </td>
-                <td style={{ display: "flex", gap: 8 }}>
+                <td style={{ display: "flex", gap: 6 }}>
                   <Link href={`/admin/notices/${n.id}`} className="admin-btn admin-btn-gold" style={{ fontSize: 8, padding: "4px 12px" }}>編集</Link>
                   <button onClick={() => deleteNotice(n.id)} className="admin-btn admin-btn-rose" style={{ fontSize: 8, padding: "4px 12px" }}>削除</button>
                 </td>
