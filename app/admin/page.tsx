@@ -42,10 +42,25 @@ export default function AdminDashboard() {
           </Link>
         ))}
       </div>
-      <div style={{ display: "flex", gap: 16 }}>
+      <div style={{ display: "flex", gap: 16, marginBottom: 40 }}>
         <Link href="/admin/events" className="admin-btn admin-btn-gold">企画管理 →</Link>
         <Link href="/admin/notices" className="admin-btn admin-btn-gold">お知らせ管理 →</Link>
       </div>
+
+      <a
+        href="https://vercel.com/chiba-eiwa-seitokai/rikasai2026-site-tokusetu/analytics"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ textDecoration: "none", display: "block", maxWidth: 400 }}
+      >
+        <div style={{ border: "1px solid #2a3a2a", padding: "20px 24px", background: "#111", display: "flex", justifyContent: "space-between", alignItems: "center", transition: "border-color 0.2s" }}>
+          <div>
+            <p style={{ fontFamily: "'Cinzel',serif", fontSize: 9, letterSpacing: "0.25em", color: "#7ab870", textTransform: "uppercase", marginBottom: 6, opacity: 0.8 }}>Access Analytics</p>
+            <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 20, fontWeight: 300, color: "rgba(232,212,168,0.75)" }}>Vercel Analytics →</p>
+            <p style={{ fontSize: 10, color: "rgba(232,212,168,0.3)", marginTop: 4 }}>Cookie不使用 · Google非公開 · ページ別閲覧数</p>
+          </div>
+        </div>
+      </a>
     </div>
   );
 }
