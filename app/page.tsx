@@ -3,26 +3,34 @@ import Countdown from "@/components/home/Countdown";
 import SchedulePreview from "@/components/home/SchedulePreview";
 import EventsPreview from "@/components/home/EventsPreview";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 async function getNotices() {
-  return prisma.notice.findMany({
-    where: { published: true },
-    orderBy: { sortOrder: "asc" },
-  });
+  try {
+    return await prisma.notice.findMany({
+      where: { published: true },
+      orderBy: { sortOrder: "asc" },
+    });
+  } catch {
+    return [];
+  }
 }
 
 async function getEvents() {
-  const events = await prisma.event.findMany({
-    where: { published: true },
-    orderBy: { sortOrder: "asc" },
-    take: 6,
-  });
-  return events.map((e) => ({
-    ...e,
-    tags: JSON.parse(e.tags) as string[],
-    info: JSON.parse(e.infoJson) as { k: string; v: string }[],
-  }));
+  try {
+    const events = await prisma.event.findMany({
+      where: { published: true },
+      orderBy: { sortOrder: "asc" },
+      take: 6,
+    });
+    return events.map((e) => ({
+      ...e,
+      tags: JSON.parse(e.tags) as string[],
+      info: JSON.parse(e.infoJson) as { k: string; v: string }[],
+    }));
+  } catch {
+    return [];
+  }
 }
 
 export default async function Home() {
