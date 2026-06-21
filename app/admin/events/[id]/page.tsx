@@ -75,7 +75,7 @@ export default function EventEditPage({ params }: { params: { id: string } }) {
       });
       if (!res.ok) {
         const err = await res.json();
-        setMsg(`アップロードエラー: ${err.error}`);
+        setMsg(`アップロードエラー: ${err.detail ?? err.error}`);
         return null;
       }
       return (await res.json()).url as string;
