@@ -1,9 +1,14 @@
 import { prisma } from "@/lib/prisma";
 import AttractionsClient from "@/components/attractions/AttractionsClient";
+import PageHero from "@/components/layout/PageHero";
 
 export const dynamic = "force-dynamic";
 
-export default async function AttractionsPage() {
+export default async function AttractionsPage({
+  searchParams,
+}: {
+  searchParams: { cat?: string };
+}) {
   const raw = await (async () => {
     try {
       return await prisma.event.findMany({
@@ -30,19 +35,9 @@ export default async function AttractionsPage() {
   }));
 
   return (
-    <>
-      <style>{`
-        .attr-hero{background:var(--ink);padding:80px 24px 60px;text-align:center;position:relative;overflow:hidden;}
-        .attr-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,169,110,0.08) 0%,transparent 70%);}
-        .attr-hero-title{font-family:"Cormorant Garamond",serif;font-size:clamp(36px,8vw,72px);font-weight:300;font-style:italic;color:var(--gold-light);position:relative;}
-        .attr-hero-sub{font-family:"Noto Serif JP",serif;font-size:13px;color:rgba(232,212,168,0.5);margin-top:8px;position:relative;}
-      `}</style>
-      <section className="attr-hero">
-        <p className="section-label" style={{ color: "rgba(212,168,67,0.6)" }}>Attractions</p>
-        <h1 className="attr-hero-title">出し物一覧</h1>
-        <p className="attr-hero-sub">Class &amp; Club Exhibition</p>
-      </section>
-      <AttractionsClient events={events} />
-    </>
+    <div className="fpage">
+      <PageHero eyebrow="Attractions" title="企画一覧" sub="Class & Club Exhibition" accent="var(--f-orange)" />
+      <AttractionsClient events={events} initialCat={searchParams.cat ?? "ALL"} />
+    </div>
   );
 }

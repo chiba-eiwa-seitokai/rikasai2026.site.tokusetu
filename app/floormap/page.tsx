@@ -1,31 +1,25 @@
+import PageHero from "@/components/layout/PageHero";
+import { TYPE_COLOR } from "@/lib/festival";
+
 export const metadata = { title: "フロアマップ — 梨花祭2026" };
 
 export default function FloormapPage() {
   return (
-    <>
+    <div className="fpage">
       <style>{`
-        .floormap-hero{background:var(--ink);padding:80px 24px 60px;text-align:center;position:relative;}
-        .floormap-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,169,110,0.06) 0%,transparent 70%);}
-        .floormap-hero-title{font-family:"Cormorant Garamond",serif;font-size:clamp(36px,8vw,72px);font-weight:300;font-style:italic;color:var(--gold-light);position:relative;}
-        .floormap-body{max-width:960px;margin:0 auto;padding:60px 24px 80px;}
-        .floor-list{display:flex;flex-direction:column;gap:32px;}
-        .floor-card{border:1px solid rgba(201,169,110,0.2);}
-        .floor-card-header{background:rgba(26,18,10,0.05);padding:14px 20px;border-bottom:1px solid rgba(201,169,110,0.1);}
-        .floor-card-title{font-family:"Cinzel",serif;font-size:10px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;}
-        .floor-rooms{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}
-        .room{padding:14px 20px;border-right:1px solid rgba(201,169,110,0.1);border-bottom:1px solid rgba(201,169,110,0.1);}
-        .room-name{font-family:"Cinzel",serif;font-size:9px;letter-spacing:0.15em;color:rgba(58,40,24,0.5);text-transform:uppercase;margin-bottom:4px;}
-        .room-event{font-size:12px;color:var(--ink);line-height:1.4;}
-        .room-type{display:inline-block;font-size:10px;padding:1px 7px;margin-top:4px;border:1px solid;}
+        .floor-list{ display:flex; flex-direction:column; gap:22px; }
+        .floor-card{ background:var(--f-card); border:1px solid var(--f-border); border-radius:18px; overflow:hidden; box-shadow:0 6px 18px var(--f-shadow); }
+        .floor-card-header{ background:#f6ecd6; padding:12px 20px; }
+        .floor-card-title{ font-size:15px; font-weight:900; color:var(--f-ink-deep); letter-spacing:.04em; }
+        .floor-rooms{ display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); }
+        .room{ padding:14px 20px; border-right:1px solid var(--f-border); border-top:1px solid var(--f-border); }
+        .room-name{ font-size:11px; font-weight:700; color:var(--f-muted); letter-spacing:.06em; margin-bottom:5px; }
+        .room-event{ font-size:13px; font-weight:700; color:var(--f-ink); line-height:1.4; margin-bottom:6px; }
       `}</style>
 
-      <section className="floormap-hero">
-        <p className="section-label" style={{ color: "rgba(212,168,67,0.6)" }}>Floor Map</p>
-        <h1 className="floormap-hero-title">フロアマップ</h1>
-        <p style={{ color: "rgba(232,212,168,0.5)", marginTop: 8, position: "relative", fontFamily: "'Noto Serif JP',serif", fontSize: 13 }}>Building &amp; Floor Guide</p>
-      </section>
+      <PageHero eyebrow="Floor Map" title="フロアマップ" sub="Building & Floor Guide" accent="var(--f-blue)" />
 
-      <div className="floormap-body">
+      <div className="fbody">
         <div className="floor-list">
           {FLOORS.map((floor) => (
             <div key={floor.label} className="floor-card">
@@ -34,13 +28,13 @@ export default function FloormapPage() {
               </div>
               <div className="floor-rooms">
                 {floor.rooms.map((room) => {
-                  const color = TYPE_COLOR[room.type] ?? "#d4a843";
+                  const color = TYPE_COLOR[room.type] ?? "var(--f-pink)";
                   return (
                     <div key={room.name} className="room">
                       <p className="room-name">{room.name}</p>
                       <p className="room-event">{room.event}</p>
                       {room.type && (
-                        <span className="room-type" style={{ color, borderColor: `${color}50` }}>{room.type}</span>
+                        <span className="ftag" style={{ background: `${color}22`, color }}>{room.type}</span>
                       )}
                     </div>
                   );
@@ -50,17 +44,9 @@ export default function FloormapPage() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
-
-const TYPE_COLOR: Record<string, string> = {
-  飲食: "#f08898",
-  体験: "#48b0b8",
-  展示: "#d4a843",
-  物販: "#7ab870",
-  ステージ: "#c9546a",
-};
 
 const FLOORS = [
   {

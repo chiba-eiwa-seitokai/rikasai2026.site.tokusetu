@@ -1,47 +1,38 @@
+import PageHero from "@/components/layout/PageHero";
+import { TYPE_COLOR } from "@/lib/festival";
+
 export const metadata = { title: "マップ — 梨花祭2026" };
 
 export default function MapPage() {
   return (
-    <>
+    <div className="fpage">
       <style>{`
-        .map-hero{background:var(--ink);padding:80px 24px 60px;text-align:center;position:relative;}
-        .map-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,169,110,0.06) 0%,transparent 70%);}
-        .map-hero-title{font-family:"Cormorant Garamond",serif;font-size:clamp(36px,8vw,72px);font-weight:300;font-style:italic;color:var(--gold-light);position:relative;}
-        .map-body{max-width:860px;margin:0 auto;padding:60px 24px 80px;}
-        .map-img-wrap{border:1px solid rgba(201,169,110,0.2);overflow:hidden;margin-bottom:40px;}
-        .map-img-wrap img{width:100%;height:auto;display:block;}
-        .map-legend-title{font-family:"Cinzel",serif;font-size:10px;letter-spacing:0.3em;color:var(--gold);text-transform:uppercase;margin-bottom:16px;}
-        .map-legend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;}
-        .map-legend-item{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--ink-soft);}
-        .map-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+        .map-img-wrap{ border:1px solid var(--f-border); border-radius:20px; overflow:hidden; margin-bottom:32px; box-shadow:0 8px 22px var(--f-shadow); background:var(--f-card); }
+        .map-img-wrap img{ width:100%; height:auto; display:block; }
+        .map-legend-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; }
+        .map-legend-item{ display:flex; align-items:center; gap:10px; background:var(--f-card); border:1px solid var(--f-border); border-radius:999px; padding:9px 16px; font-size:13px; font-weight:700; color:var(--f-ink); }
+        .map-legend-dot{ width:14px; height:14px; border-radius:50%; flex:none; }
       `}</style>
 
-      <section className="map-hero">
-        <p className="section-label" style={{ color: "rgba(212,168,67,0.6)" }}>Map</p>
-        <h1 className="map-hero-title">マップ</h1>
-        <p style={{ color: "rgba(232,212,168,0.5)", marginTop: 8, position: "relative", fontFamily: "'Noto Serif JP',serif", fontSize: 13 }}>Venue Map</p>
-      </section>
+      <PageHero eyebrow="Map" title="マップ" sub="Venue Map" accent="var(--f-green)" />
 
-      <div className="map-body">
+      <div className="fbody">
         <div className="map-img-wrap">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/map.png" alt="梨花祭2026 会場マップ" />
         </div>
-        <p className="map-legend-title">凡例</p>
-        <div className="map-legend-grid">
-          {[
-            { color: "#f08898", label: "飲食" },
-            { color: "#48b0b8", label: "体験" },
-            { color: "#d4a843", label: "展示" },
-            { color: "#7ab870", label: "物販" },
-            { color: "#c9546a", label: "ステージ" },
-          ].map((l) => (
-            <div key={l.label} className="map-legend-item">
-              <span className="map-legend-dot" style={{ background: l.color }} />
-              <span>{l.label}</span>
-            </div>
-          ))}
+        <div className="fsect">
+          <p className="fsect-title">凡例 <span className="en">LEGEND</span></p>
+          <div className="map-legend-grid">
+            {Object.entries(TYPE_COLOR).map(([label, color]) => (
+              <div key={label} className="map-legend-item">
+                <span className="map-legend-dot" style={{ background: color }} />
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

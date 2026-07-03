@@ -1,8 +1,12 @@
+import PageHero from "@/components/layout/PageHero";
+
 export const metadata = { title: "ご注意 — 梨花祭2026" };
 
 const RULES = [
   {
     title: "入場について",
+    emoji: "🎟",
+    accent: "var(--f-pink)",
     items: [
       "一般来場の方は、事前の招待リンクをお持ちの方のみご入場いただけます。",
       "QRコードを印刷またはスマートフォンに表示してお越しください。",
@@ -11,6 +15,8 @@ const RULES = [
   },
   {
     title: "撮影・録音について",
+    emoji: "📷",
+    accent: "var(--f-blue)",
     items: [
       "会場内での写真・動画撮影は、出演者・展示物のプライバシーに配慮の上お楽しみください。",
       "ステージ演目の無断録音・録画・ライブ配信はご遠慮ください。",
@@ -19,6 +25,8 @@ const RULES = [
   },
   {
     title: "マナーについて",
+    emoji: "🌿",
+    accent: "var(--f-green)",
     items: [
       "構内は全面禁煙です。",
       "ゴミは各自でお持ち帰りいただくようお願いします。",
@@ -28,6 +36,8 @@ const RULES = [
   },
   {
     title: "お支払いについて",
+    emoji: "💴",
+    accent: "var(--f-orange)",
     items: [
       "各企画の料金は現金払いが基本です。一部QRコード決済対応の企画もあります。",
       "入場は無料ですが、飲食・体験・物販の各企画は100〜500円程度の料金が発生します。",
@@ -35,6 +45,8 @@ const RULES = [
   },
   {
     title: "緊急時について",
+    emoji: "🚑",
+    accent: "var(--f-purple)",
     items: [
       "体調不良の方は、最寄りのスタッフまたは保健室にお申し出ください。",
       "緊急事態が発生した場合は、スタッフの指示に従ってください。",
@@ -44,30 +56,26 @@ const RULES = [
 
 export default function RulesPage() {
   return (
-    <>
+    <div className="fpage">
       <style>{`
-        .rules-hero{background:var(--ink);padding:80px 24px 60px;text-align:center;position:relative;}
-        .rules-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,169,110,0.06) 0%,transparent 70%);}
-        .rules-hero-title{font-family:"Cormorant Garamond",serif;font-size:clamp(36px,8vw,72px);font-weight:300;font-style:italic;color:var(--gold-light);position:relative;}
-        .rules-body{max-width:720px;margin:0 auto;padding:60px 24px 80px;}
-        .rule-group{margin-bottom:48px;}
-        .rule-group-title{font-family:"Cinzel",serif;font-size:10px;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(212,168,67,0.2);}
-        .rule-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
-        .rule-list li{font-size:13px;color:var(--ink-soft);line-height:1.8;padding-left:20px;position:relative;}
-        .rule-list li::before{content:"—";position:absolute;left:0;color:var(--gold);opacity:0.6;}
+        .rule-group{ margin-bottom:22px; }
+        .rule-group-title{ display:flex; align-items:center; gap:10px; font-size:17px; font-weight:900; color:var(--f-ink-deep); margin-bottom:14px; }
+        .rule-group-title .ico{ width:34px; height:34px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:18px; background:#f6ecd6; flex:none; }
+        .rule-list{ list-style:none; display:flex; flex-direction:column; gap:12px; }
+        .rule-list li{ font-size:13.5px; font-weight:500; color:var(--f-ink-soft); line-height:1.8; padding-left:22px; position:relative; }
+        .rule-list li::before{ content:"●"; position:absolute; left:0; top:1px; font-size:9px; color:var(--dot); }
       `}</style>
 
-      <section className="rules-hero">
-        <p className="section-label" style={{ color: "rgba(212,168,67,0.6)" }}>Guidelines</p>
-        <h1 className="rules-hero-title">ご注意</h1>
-        <p style={{ color: "rgba(232,212,168,0.5)", marginTop: 8, position: "relative", fontFamily: "'Noto Serif JP',serif", fontSize: 13 }}>Rules &amp; Guidelines</p>
-      </section>
+      <PageHero eyebrow="Guidelines" title="ご注意" sub="Rules & Guidelines" accent="var(--f-orange)" />
 
-      <div className="rules-body">
+      <div className="fbody">
         {RULES.map((group) => (
-          <div key={group.title} className="rule-group">
-            <p className="rule-group-title">{group.title}</p>
-            <ul className="rule-list">
+          <div key={group.title} className="fcard rule-group">
+            <p className="rule-group-title">
+              <span className="ico">{group.emoji}</span>
+              {group.title}
+            </p>
+            <ul className="rule-list" style={{ ["--dot" as string]: group.accent }}>
               {group.items.map((item) => (
                 <li key={item}>{item}</li>
               ))}
@@ -75,6 +83,6 @@ export default function RulesPage() {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }

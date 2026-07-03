@@ -307,21 +307,21 @@ export default async function Home() {
               <img src={IMG.evStage} alt="ステージ発表" className="thumb" />
               <h3 style={{ color: "var(--f-purple)" }}>ステージ発表</h3>
               <p>部活動や有志団体による<br />熱いパフォーマンス！</p>
-              <Link href="/attractions" className="card-btn" style={{ color: "var(--f-purple)", borderColor: "var(--f-purple-soft)" }}>詳細はこちら</Link>
+              <Link href={`/attractions?cat=${encodeURIComponent("ステージ")}`} className="card-btn" style={{ color: "var(--f-purple)", borderColor: "var(--f-purple-soft)" }}>詳細はこちら</Link>
             </div>
             <div className="card">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={IMG.evGallery} alt="展示・企画" className="thumb" />
-              <h3 style={{ color: "var(--f-orange)" }}>展示・企画</h3>
-              <p>個性あふれる展示や体験企画が<br />盛りだくさん！</p>
-              <Link href="/attractions" className="card-btn" style={{ color: "var(--f-orange)", borderColor: "var(--f-orange-soft)" }}>詳細はこちら</Link>
+              <img src={IMG.evGallery} alt="クラス・部活企画" className="thumb" />
+              <h3 style={{ color: "var(--f-orange)" }}>クラス・部活企画</h3>
+              <p>個性あふれる展示・体験・物販が<br />盛りだくさん！</p>
+              <Link href={`/attractions?cat=${encodeURIComponent("クラス・部活企画")}`} className="card-btn" style={{ color: "var(--f-orange)", borderColor: "var(--f-orange-soft)" }}>詳細はこちら</Link>
             </div>
             <div className="card">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={IMG.evNight} alt="ナイトイベント" className="thumb" />
-              <h3 style={{ color: "var(--f-blue)" }}>ナイトイベント</h3>
-              <p>ライトアップとともに楽しむ<br />特別なひととき。</p>
-              <Link href="/attractions" className="card-btn" style={{ color: "var(--f-blue)", borderColor: "var(--f-blue-soft)" }}>詳細はこちら</Link>
+              <img src={IMG.evNight} alt="飲食・キッチンカー" className="thumb" />
+              <h3 style={{ color: "var(--f-pink)" }}>飲食・キッチンカー</h3>
+              <p>おいしいグルメが勢ぞろい！<br />キッチンカーもやってくる！</p>
+              <Link href={`/attractions?cat=${encodeURIComponent("飲食")}`} className="card-btn" style={{ color: "var(--f-pink)", borderColor: "var(--f-pink-light)" }}>詳細はこちら</Link>
             </div>
           </div>
           <div style={{ textAlign: "center", margin: "34px 0 6px" }}>
@@ -341,7 +341,7 @@ export default async function Home() {
               <p style={{ fontSize: 14, fontWeight: 500, lineHeight: 1.8, color: "var(--f-ink-soft)", margin: "0 0 18px" }}>
                 おいしいグルメが勢ぞろい！<br />キッチンカーもやってくる！
               </p>
-              <Link href="/attractions" className="solid-btn" style={{ background: "linear-gradient(var(--f-pink-light),var(--f-pink))", boxShadow: "0 5px 12px rgba(236,97,120,.35)" }}>
+              <Link href={`/attractions?cat=${encodeURIComponent("飲食")}`} className="solid-btn" style={{ background: "linear-gradient(var(--f-pink-light),var(--f-pink))", boxShadow: "0 5px 12px rgba(236,97,120,.35)" }}>
                 詳細はこちら <span>›</span>
               </Link>
             </div>

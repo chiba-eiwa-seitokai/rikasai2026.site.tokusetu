@@ -52,6 +52,70 @@ body {
 
 @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
+/* ===================================================================== */
+/* Festival inner-page shared components                                  */
+/* ===================================================================== */
+.fpage { max-width: 900px; margin: 0 auto; background: var(--f-surface); overflow: hidden; }
+
+.fhero {
+  position: relative;
+  text-align: center;
+  padding: 54px 24px 42px;
+  background: linear-gradient(180deg, #fbf1dd 0%, var(--f-card-alt) 100%);
+  border-bottom: 1px solid var(--f-border);
+  overflow: hidden;
+}
+.fhero-inner { position: relative; z-index: 1; }
+.fhero-eyebrow {
+  font-family: "DM Serif Display", serif;
+  font-style: italic;
+  font-size: 16px;
+  letter-spacing: .12em;
+  color: var(--f-pink);
+  margin-bottom: 6px;
+}
+.fhero-title {
+  font-size: clamp(30px, 7vw, 46px);
+  font-weight: 900;
+  color: var(--f-ink-deep);
+  letter-spacing: .05em;
+  line-height: 1.15;
+}
+.fhero-sub {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  color: var(--f-muted);
+  margin-top: 8px;
+}
+.fhero-decor { position: absolute; bottom: -12px; opacity: .9; pointer-events: none; z-index: 0; }
+
+.fbody { padding: 44px 32px 64px; }
+@media (max-width: 720px) { .fbody { padding: 34px 20px 52px; } }
+
+.fsect { margin-bottom: 44px; }
+.fsect-title {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 19px; font-weight: 900; color: var(--f-ink-deep);
+  letter-spacing: .04em; margin-bottom: 18px;
+}
+.fsect-title::before {
+  content: ""; width: 7px; height: 22px; border-radius: 4px;
+  background: var(--f-pink); flex: none;
+}
+.fsect-title .en { font-size: 11px; font-weight: 700; color: var(--f-muted); letter-spacing: .18em; }
+
+.fcard {
+  background: var(--f-card); border: 1px solid var(--f-border);
+  border-radius: 18px; padding: 22px 24px; box-shadow: 0 6px 18px var(--f-shadow);
+}
+.fbody-text { font-size: 14.5px; font-weight: 500; line-height: 2; color: var(--f-ink-soft); }
+
+.ftag {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  padding: 3px 12px; border-radius: 999px; letter-spacing: .04em;
+}
+
 /* Reveal animation */
 .reveal {
   opacity: 0;
