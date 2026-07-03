@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-// All existing menu items are preserved. アクセス is rendered as the pink CTA
+// All existing menu items are preserved. 入場方法 is rendered as the pink CTA
 // pill (mirroring the design's「来校方法」button); the rest are plain links.
 const NAV_LINKS = [
   { label: "梨花祭とは", href: "/about" },
@@ -15,7 +15,7 @@ const NAV_LINKS = [
   { label: "ご注意", href: "/rules" },
 ];
 
-const CTA = { label: "🎟 アクセス", href: "/#access" };
+const CTA = { label: "🎟 入場方法", href: "/#access" };
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
