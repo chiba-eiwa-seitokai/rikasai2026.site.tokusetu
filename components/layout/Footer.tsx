@@ -56,7 +56,7 @@ export default function Footer() {
           <Link href="/#notice">お知らせ</Link>
           <Link href="/award">梨花祭賞</Link>
           <Link href="/rules">ご注意</Link>
-          <Link href="/#access">アクセス</Link>
+          <Link href="/#access">入場方法</Link>
         </div>
         <p className="footer-copy">© 2026 梨花祭実行委員会 / Rikasai Executive Committee</p>
       </footer>
