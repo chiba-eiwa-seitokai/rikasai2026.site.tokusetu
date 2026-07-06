@@ -57,14 +57,14 @@ const RULES = [
 export default function RulesPage() {
   return (
     <div className="fpage">
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .rule-group{ margin-bottom:22px; }
         .rule-group-title{ display:flex; align-items:center; gap:10px; font-size:17px; font-weight:900; color:var(--f-ink-deep); margin-bottom:14px; }
         .rule-group-title .ico{ width:34px; height:34px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:18px; background:#f6ecd6; flex:none; }
         .rule-list{ list-style:none; display:flex; flex-direction:column; gap:12px; }
         .rule-list li{ font-size:13.5px; font-weight:500; color:var(--f-ink-soft); line-height:1.8; padding-left:22px; position:relative; }
         .rule-list li::before{ content:"●"; position:absolute; left:0; top:1px; font-size:9px; color:var(--dot); }
-      `}</style>
+      ` }} />
 
       <PageHero eyebrow="Guidelines" title="ご注意" sub="Rules & Guidelines" accent="var(--f-orange)" />
 

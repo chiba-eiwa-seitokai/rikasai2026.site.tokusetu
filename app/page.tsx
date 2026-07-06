@@ -46,7 +46,7 @@ export default async function Home() {
 
   return (
     <>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .lp {
           max-width: 900px;
           margin: 0 auto;
@@ -206,7 +206,7 @@ export default async function Home() {
           .links-grid { grid-template-columns: 1fr; }
           .date-day { padding: 0 16px; }
         }
-      `}</style>
+      ` }} />
 
       <div className="lp">
         {/* ============ HERO ============ */}

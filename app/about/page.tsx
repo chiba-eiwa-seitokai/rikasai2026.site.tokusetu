@@ -12,7 +12,7 @@ const INFO = [
 export default function AboutPage() {
   return (
     <div className="fpage">
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .about-lead{ text-align:center; font-size:clamp(20px,4.5vw,28px); font-weight:900; color:var(--f-ink-deep); line-height:1.7; margin-bottom:32px; }
         .theme-box{ position:relative; background:linear-gradient(120deg,#fff3e0,#ffe6ea); border:1px solid var(--f-border); border-radius:22px; padding:36px 28px; text-align:center; margin:0 0 44px; overflow:hidden; }
         .theme-box .en{ font-family:"DM Serif Display",serif; font-size:11px; font-style:italic; letter-spacing:.3em; color:var(--f-pink); margin-bottom:10px; }
@@ -22,7 +22,7 @@ export default function AboutPage() {
         @media(max-width:560px){ .about-info-grid{ grid-template-columns:1fr; } }
         .about-info .lbl{ display:inline-block; font-size:12px; font-weight:700; color:#fff; background:var(--f-pink); border-radius:999px; padding:3px 14px; margin-bottom:10px; }
         .about-info .val{ font-size:14px; font-weight:500; color:var(--f-ink-soft); line-height:1.7; white-space:pre-line; }
-      `}</style>
+      ` }} />
 
       <PageHero eyebrow="About" title="梨花祭とは" sub="About Rikasai 2026" accent="var(--f-pink)" />
 

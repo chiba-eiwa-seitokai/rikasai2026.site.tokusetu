@@ -25,7 +25,7 @@ export default function SchedulePreview() {
 
   return (
     <>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .sched-section{background:var(--ink);padding:80px 0;}
         .sched-inner{max-width:720px;margin:0 auto;padding:0 24px;}
         .schedule-tabs{display:flex;max-width:400px;margin:0 auto 48px;border:1px solid rgba(201,169,110,0.3);}
@@ -43,7 +43,7 @@ export default function SchedulePreview() {
         .tag-open{color:var(--teal-light);border-color:rgba(72,176,184,0.5);}
         .tag-main{color:var(--gold);border-color:rgba(212,168,67,0.5);}
         .tag-close{color:var(--rose);border-color:rgba(201,84,106,0.5);}
-      `}</style>
+      ` }} />
       <section className="sched-section" id="schedule">
         <div className="sched-inner">
           <div className="section-header">

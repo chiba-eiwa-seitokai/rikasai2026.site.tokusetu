@@ -20,7 +20,7 @@ const CATEGORIES = [
 export default function AwardPage() {
   return (
     <div className="fpage">
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .awards-grid{ display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:8px; }
         @media(max-width:560px){ .awards-grid{ grid-template-columns:1fr; } }
         .award-card{ border-radius:18px; padding:24px 22px; border:1px solid var(--f-border); }
@@ -35,7 +35,7 @@ export default function AwardPage() {
         .voting-box{ background:linear-gradient(120deg,#ffe6ea,#fff3e0); border:1px solid var(--f-border); border-radius:20px; padding:32px 28px; margin-top:40px; text-align:center; }
         .voting-box .vt{ font-size:17px; font-weight:900; color:var(--f-pink); margin-bottom:10px; }
         .voting-box .vd{ font-size:13.5px; font-weight:500; color:var(--f-ink-soft); line-height:1.9; }
-      `}</style>
+      ` }} />
 
       <PageHero eyebrow="Awards" title="梨花祭賞" sub="Rikasai Award 2026" accent="var(--f-orange)" />
 
