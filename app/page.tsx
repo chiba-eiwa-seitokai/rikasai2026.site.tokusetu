@@ -399,11 +399,11 @@ export default async function Home() {
         <section className="lp-section" id="access" data-screen-label="Access" style={{ paddingBottom: 60 }}>
           <div className="links-grid">
             <div className="links-card">
-              <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" style={{ display: "block", textDecoration: "none" }}>
+              <a href="https://www.instagram.com/rikasai_ceh/?hl=ja" target="_blank" rel="noopener noreferrer" style={{ display: "block", textDecoration: "none" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={IMG.btnInsta} alt="公式Instagram" style={{ height: 34 }} />
               </a>
-              <a href="https://www.chiba-eiwa.ed.jp/" target="_blank" rel="noopener noreferrer" style={{ display: "block", textDecoration: "none" }}>
+              <a href="https://www.ceh.ed.jp/" target="_blank" rel="noopener noreferrer" style={{ display: "block", textDecoration: "none" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={IMG.btnSite} alt="学校公式サイト" style={{ height: 34 }} />
               </a>

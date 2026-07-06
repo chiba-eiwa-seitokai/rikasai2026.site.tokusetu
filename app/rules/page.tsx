@@ -8,9 +8,12 @@ const RULES = [
     emoji: "🎟",
     accent: "var(--f-pink)",
     items: [
-      "一般来場の方は、事前の招待リンクをお持ちの方のみご入場いただけます。",
-      "QRコードを印刷またはスマートフォンに表示してお越しください。",
+      "【中学生の方】7月18日(土) 9:30〜14:00（入場13:30まで）／事前予約：不要／持ち物：生徒手帳または制服着用、上履き・靴袋",
+      "【一般の方（招待制）】7月18日(日) 9:30〜14:00（入場13:30まで）／事前予約：要（招待QRコード）／持ち物：招待QRコード、上履き・靴袋 ※事前QRコードのない一般の方はご入場いただけません",
+      "【卒業生の方】7月17日(金)・18日(土) 9:30〜14:00（入室13:30まで）／持ち物：不要 ※当日受付にて氏名等をご記入いただいた上で入場となります",
+      "【在校生家族】7月17日(土)・18日(日) 9:30〜14:00（入場13:30まで）／事前予約：不要／持ち物：保護者証明メールの画面、上履き・靴袋",
       "入場料は無料です。各企画は個別に料金が発生する場合があります。",
+      "来校方法（駅からのバス時刻表等）の詳細は学校公式サイトをご確認ください。",
     ],
   },
   {
@@ -70,7 +73,12 @@ export default function RulesPage() {
 
       <div className="fbody">
         {RULES.map((group) => (
-          <div key={group.title} className="fcard rule-group">
+          <div
+            key={group.title}
+            id={group.title === "入場について" ? "entry" : undefined}
+            className="fcard rule-group"
+            style={group.title === "入場について" ? { scrollMarginTop: 84 } : undefined}
+          >
             <p className="rule-group-title">
               <span className="ico">{group.emoji}</span>
               {group.title}

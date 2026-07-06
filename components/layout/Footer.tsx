@@ -47,7 +47,7 @@ export default function Footer() {
       ` }} />
       <footer className="footer">
         <p className="footer-logo">梨花祭 2026</p>
-        <p className="footer-sub">千葉英和高等学校・第53回文化祭</p>
+        <p className="footer-sub">千葉英和高等学校・文化祭</p>
         <div className="footer-links">
           <Link href="/about">梨花祭とは</Link>
           <Link href="/attractions">企画一覧</Link>

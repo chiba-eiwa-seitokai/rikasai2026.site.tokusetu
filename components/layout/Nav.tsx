@@ -15,7 +15,7 @@ const NAV_LINKS = [
   { label: "ご注意", href: "/rules" },
 ];
 
-const CTA = { label: "🎟 アクセス", href: "/#access" };
+const CTA = { label: "🎟 入場方法はこちら", href: "/rules#entry" };
 
 export default function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -175,7 +175,7 @@ export default function Nav() {
         <div className="nav-inner">
           <Link href="/" className="nav-brand">
             <span className="nav-brand-jp">梨花祭 2026</span>
-            <span className="nav-brand-sub">千葉英和高等学校・第53回文化祭</span>
+            <span className="nav-brand-sub">千葉英和高等学校・文化祭</span>
           </Link>
           <div className="nav-cluster">
             <div className="nav-links">

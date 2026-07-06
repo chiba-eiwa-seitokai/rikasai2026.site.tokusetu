@@ -5,9 +5,9 @@ import { Analytics } from "@vercel/analytics/next";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
-  title: "梨花祭2026 — Rikasai | 千葉英和高等学校 第53回文化祭",
+  title: "梨花祭2026 — Rikasai | 千葉英和高等学校",
   description:
-    "千葉英和高等学校 第53回文化祭「梨花祭」2026年7月17日（金）・18日（土）開催。CHALLENGE! みんなでやろうよ、梨花祭！",
+    "千葉英和高等学校 文化祭「梨花祭」2026年7月17日（金）・18日（土）開催。CHALLENGE! みんなでやろうよ、梨花祭！",
 };
 
 export default function RootLayout({
