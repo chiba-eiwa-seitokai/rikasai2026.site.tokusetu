@@ -114,7 +114,8 @@ export default function EventEditPage({ params }: { params: { id: string } }) {
       setMsg("保存しました");
       setTimeout(() => router.push("/admin/events"), 800);
     } else {
-      setMsg("エラーが発生しました");
+      const err = await res.json().catch(() => null);
+      setMsg(`エラーが発生しました${err?.detail ? `: ${err.detail}` : ""}`);
     }
   }
 

@@ -35,7 +35,7 @@ export default function SchedulePage() {
 
   return (
     <div className="fpage">
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .sched-tabs{ display:flex; gap:8px; max-width:440px; margin:0 auto 36px; background:var(--f-card); border:1px solid var(--f-border); border-radius:999px; padding:6px; box-shadow:0 6px 18px var(--f-shadow); }
         .tab-btn{ flex:1; padding:11px 16px; background:transparent; border:none; border-radius:999px; color:var(--f-muted); font-size:13px; font-weight:700; cursor:pointer; transition:background .2s,color .2s; }
         .tab-btn.active{ background:linear-gradient(var(--f-pink-light),var(--f-pink)); color:#fff; box-shadow:0 4px 10px rgba(236,97,120,.35); }
@@ -47,7 +47,7 @@ export default function SchedulePage() {
         .sched-card{ flex:1; background:var(--f-card); border:1px solid var(--f-border); border-radius:14px; padding:14px 18px; box-shadow:0 4px 12px var(--f-shadow); }
         .sched-name{ font-size:15px; font-weight:900; color:var(--f-ink-deep); margin:6px 0 4px; }
         .sched-detail{ font-size:12.5px; font-weight:500; color:var(--f-muted); }
-      `}</style>
+      ` }} />
 
       <section className="fhero">
         {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -45,7 +45,7 @@ export default function AttractionsClient({
 
   return (
     <div className="fbody">
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .attr-controls{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; justify-content:center; margin-bottom:28px; }
         .search-box{ display:flex; align-items:center; gap:8px; background:var(--f-card); border:1px solid var(--f-border); border-radius:999px; padding:0 16px; flex:1; max-width:320px; box-shadow:0 4px 12px var(--f-shadow); }
         .search-input{ border:none; background:transparent; outline:none; padding:11px 0; font-family:"Zen Maru Gothic",sans-serif; font-size:13px; font-weight:500; color:var(--f-ink); width:100%; }
@@ -63,7 +63,7 @@ export default function AttractionsClient({
         .acard-name{ font-size:16px; font-weight:900; color:var(--f-ink-deep); line-height:1.4; margin-bottom:8px; }
         .acard-desc{ font-size:12.5px; font-weight:500; color:var(--f-ink-soft); line-height:1.75; }
         .no-results{ text-align:center; padding:60px 24px; font-size:14px; font-weight:700; color:var(--f-muted); }
-      `}</style>
+      ` }} />
 
       <div className="attr-controls">
         <div className="search-box">

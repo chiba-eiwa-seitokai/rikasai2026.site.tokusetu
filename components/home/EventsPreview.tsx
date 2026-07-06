@@ -22,7 +22,7 @@ const TYPE_COLOR: Record<string, string> = {
 export default function EventsPreview({ events }: { events: Event[] }) {
   return (
     <>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .events-preview-section{background:var(--parchment);padding:80px 0;}
         .events-preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;max-width:960px;margin:0 auto;padding:0 24px;}
         .class-card{border:1px solid rgba(201,169,110,0.25);background:var(--cream);position:relative;overflow:hidden;display:flex;flex-direction:column;}
@@ -36,7 +36,7 @@ export default function EventsPreview({ events }: { events: Event[] }) {
         .events-preview-more{text-align:center;margin-top:40px;}
         .events-preview-more a{font-family:"Cinzel",serif;font-size:10px;letter-spacing:0.3em;color:var(--gold);text-decoration:none;border:1px solid rgba(212,168,67,0.4);padding:10px 28px;text-transform:uppercase;transition:background 0.2s,color 0.2s;display:inline-block;}
         .events-preview-more a:hover{background:var(--gold);color:var(--ink);}
-      `}</style>
+      ` }} />
       <section className="events-preview-section" id="classes">
         <div className="section-header" style={{ padding: "0 24px 0" }}>
           <p className="section-label">Attractions</p>

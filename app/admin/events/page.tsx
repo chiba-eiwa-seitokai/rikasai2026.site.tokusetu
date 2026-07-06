@@ -21,15 +21,28 @@ export default function AdminEventsPage() {
   const { token } = useAuth();
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [filterType, setFilterType] = useState("all");
   const [filterPublished, setFilterPublished] = useState("all");
 
   async function load() {
-    const res = await fetch("/api/events?all=true", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setEvents(await res.json());
+    setError("");
+    try {
+      const res = await fetch("/api/events?all=true", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      if (!res.ok || !Array.isArray(data)) {
+        setError(data?.detail ?? data?.error ?? "企画の読み込みに失敗しました");
+        setEvents([]);
+      } else {
+        setEvents(data);
+      }
+    } catch {
+      setError("企画の読み込みに失敗しました");
+      setEvents([]);
+    }
     setLoading(false);
   }
 
@@ -119,6 +132,8 @@ export default function AdminEventsPage() {
 
       {loading ? (
         <p style={{ color: "rgba(232,212,168,0.4)", fontSize: 13 }}>読み込み中...</p>
+      ) : error ? (
+        <p style={{ color: "var(--rose)", fontSize: 13 }}>{error}</p>
       ) : (
         <table className="admin-table">
           <thead>

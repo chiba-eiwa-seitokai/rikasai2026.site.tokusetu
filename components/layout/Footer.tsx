@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <>
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .footer {
           background: #fbf5e6;
           border-top: 1px solid var(--f-border);
@@ -11,7 +11,7 @@ export default function Footer() {
           text-align: center;
         }
         .footer-logo {
-          font-family: "DM Serif Display", serif;
+          font-family: 'DM Serif Display', serif;
           font-size: 30px;
           color: var(--f-ink-deep);
           letter-spacing: .04em;
@@ -44,7 +44,7 @@ export default function Footer() {
           font-weight: 500;
           color: var(--f-muted);
         }
-      `}</style>
+      ` }} />
       <footer className="footer">
         <p className="footer-logo">梨花祭 2026</p>
         <p className="footer-sub">千葉英和高等学校・第53回文化祭</p>

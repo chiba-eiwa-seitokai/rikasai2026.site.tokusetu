@@ -16,12 +16,25 @@ export default function AdminNoticesPage() {
   const { token } = useAuth();
   const [notices, setNotices] = useState<Notice[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   async function load() {
-    const res = await fetch("/api/notices?all=true", {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    setNotices(await res.json());
+    setError("");
+    try {
+      const res = await fetch("/api/notices?all=true", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const data = await res.json();
+      if (!res.ok || !Array.isArray(data)) {
+        setError(data?.detail ?? data?.error ?? "お知らせの読み込みに失敗しました");
+        setNotices([]);
+      } else {
+        setNotices(data);
+      }
+    } catch {
+      setError("お知らせの読み込みに失敗しました");
+      setNotices([]);
+    }
     setLoading(false);
   }
 
@@ -67,6 +80,8 @@ export default function AdminNoticesPage() {
       </div>
       {loading ? (
         <p style={{ color: "rgba(232,212,168,0.4)", fontSize: 13 }}>読み込み中...</p>
+      ) : error ? (
+        <p style={{ color: "var(--rose)", fontSize: 13 }}>{error}</p>
       ) : (
         <table className="admin-table">
           <thead>
