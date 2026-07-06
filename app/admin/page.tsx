@@ -7,18 +7,29 @@ import { useAuth } from "./auth-context";
 export default function AdminDashboard() {
   const { token } = useAuth();
   const [stats, setStats] = useState({ events: 0, publishedEvents: 0, notices: 0 });
+  const [error, setError] = useState("");
 
   useEffect(() => {
     async function load() {
-      const [ev, no] = await Promise.all([
-        fetch("/api/events?all=true", { headers: { Authorization: `Bearer ${token}` } }).then((r) => r.json()),
-        fetch("/api/notices?all=true", { headers: { Authorization: `Bearer ${token}` } }).then((r) => r.json()),
-      ]);
-      setStats({
-        events: ev.length,
-        publishedEvents: ev.filter((e: { published: boolean }) => e.published).length,
-        notices: no.length,
-      });
+      setError("");
+      try {
+        const [evRes, noRes] = await Promise.all([
+          fetch("/api/events?all=true", { headers: { Authorization: `Bearer ${token}` } }),
+          fetch("/api/notices?all=true", { headers: { Authorization: `Bearer ${token}` } }),
+        ]);
+        const [ev, no] = await Promise.all([evRes.json(), noRes.json()]);
+        if (!evRes.ok || !noRes.ok || !Array.isArray(ev) || !Array.isArray(no)) {
+          setError("データの読み込みに失敗しました");
+          return;
+        }
+        setStats({
+          events: ev.length,
+          publishedEvents: ev.filter((e: { published: boolean }) => e.published).length,
+          notices: no.length,
+        });
+      } catch {
+        setError("データの読み込みに失敗しました");
+      }
     }
     if (token) load();
   }, [token]);
@@ -28,6 +39,7 @@ export default function AdminDashboard() {
       <h2 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 28, fontWeight: 300, fontStyle: "italic", color: "var(--gold-light)", marginBottom: 32 }}>
         Dashboard
       </h2>
+      {error && <p style={{ color: "var(--rose)", fontSize: 13, marginBottom: 24 }}>{error}</p>}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))", gap: 20, marginBottom: 48 }}>
         {[
           { label: "総企画数", value: stats.events, link: "/admin/events" },
