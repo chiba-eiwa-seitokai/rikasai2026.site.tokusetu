@@ -2,20 +2,44 @@ import PageHero from "@/components/layout/PageHero";
 
 export const metadata = { title: "ご注意 — 梨花祭2026" };
 
-const RULES = [
+const ENTRY_INFO = [
   {
-    title: "入場について",
-    emoji: "🎟",
-    accent: "var(--f-pink)",
-    items: [
-      "【中学生の方】7月18日(土) 9:30〜14:00（入場13:30まで）／事前予約：不要／持ち物：生徒手帳または制服着用、上履き・靴袋",
-      "【一般の方（招待制）】7月18日(日) 9:30〜14:00（入場13:30まで）／事前予約：要（招待QRコード）／持ち物：招待QRコード、上履き・靴袋 ※事前QRコードのない一般の方はご入場いただけません",
-      "【卒業生の方】7月17日(金)・18日(土) 9:30〜14:00（入室13:30まで）／持ち物：不要 ※当日受付にて氏名等をご記入いただいた上で入場となります",
-      "【在校生家族】7月17日(土)・18日(日) 9:30〜14:00（入場13:30まで）／事前予約：不要／持ち物：保護者証明メールの画面、上履き・靴袋",
-      "入場料は無料です。各企画は個別に料金が発生する場合があります。",
-      "来校方法（駅からのバス時刻表等）の詳細は学校公式サイトをご確認ください。",
-    ],
+    audience: "中学生の方",
+    emoji: "🎒",
+    date: "7月18日(土)",
+    time: "9:30〜14:00（入場13:30まで）",
+    reservation: "不要",
+    items: ["生徒手帳または制服着用", "上履き・靴袋"],
   },
+  {
+    audience: "一般の方（招待制）",
+    emoji: "✉️",
+    date: "7月18日(日)",
+    time: "9:30〜14:00（入場13:30まで）",
+    reservation: "要（招待QRコード）",
+    items: ["招待QRコード", "上履き・靴袋"],
+    note: "事前QRコードのない一般の方はご入場いただけません。",
+  },
+  {
+    audience: "卒業生の方",
+    emoji: "🎓",
+    date: "7月17日(金)・18日(土)",
+    time: "9:30〜14:00（入室13:30まで）",
+    reservation: "不要",
+    items: ["特になし"],
+    note: "当日受付にて氏名等をご記入いただいた上で入場となります。",
+  },
+  {
+    audience: "在校生家族",
+    emoji: "👨‍👩‍👧",
+    date: "7月17日(土)・18日(日)",
+    time: "9:30〜14:00（入場13:30まで）",
+    reservation: "不要",
+    items: ["保護者証明メールの画面", "上履き・靴袋"],
+  },
+];
+
+const RULES = [
   {
     title: "撮影・録音について",
     emoji: "📷",
@@ -67,18 +91,48 @@ export default function RulesPage() {
         .rule-list{ list-style:none; display:flex; flex-direction:column; gap:12px; }
         .rule-list li{ font-size:13.5px; font-weight:500; color:var(--f-ink-soft); line-height:1.8; padding-left:22px; position:relative; }
         .rule-list li::before{ content:"●"; position:absolute; left:0; top:1px; font-size:9px; color:var(--dot); }
+
+        .entry-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:18px; }
+        @media (max-width:640px){ .entry-grid{ grid-template-columns:1fr; } }
+        .entry-card{ background:var(--f-card); border:1px solid var(--f-border); border-radius:16px; padding:20px 20px 18px; box-shadow:0 6px 18px var(--f-shadow); }
+        .entry-card-title{ display:flex; align-items:center; gap:8px; font-size:15px; font-weight:900; color:var(--f-ink-deep); margin-bottom:12px; }
+        .entry-date{ display:inline-block; font-size:13px; font-weight:700; color:#fff; background:var(--f-pink); border-radius:999px; padding:4px 14px; margin-bottom:10px; }
+        .entry-row{ display:flex; gap:8px; font-size:12.5px; font-weight:500; color:var(--f-ink-soft); line-height:1.7; margin-bottom:4px; }
+        .entry-row .k{ flex:none; font-weight:700; color:var(--f-ink); min-width:64px; }
+        .entry-note{ font-size:11.5px; font-weight:500; color:var(--f-pink); line-height:1.6; margin-top:8px; }
       ` }} />
 
       <PageHero eyebrow="Guidelines" title="ご注意" sub="Rules & Guidelines" accent="var(--f-orange)" />
 
       <div className="fbody">
+        <div id="entry" className="fcard rule-group" style={{ scrollMarginTop: 84 }}>
+          <p className="rule-group-title">
+            <span className="ico">🎟</span>
+            入場について
+          </p>
+          <div className="entry-grid">
+            {ENTRY_INFO.map((e) => (
+              <div key={e.audience} className="entry-card">
+                <p className="entry-card-title">
+                  <span>{e.emoji}</span>
+                  {e.audience}
+                </p>
+                <span className="entry-date">{e.date}</span>
+                <div className="entry-row"><span className="k">時間</span>{e.time}</div>
+                <div className="entry-row"><span className="k">事前予約</span>{e.reservation}</div>
+                <div className="entry-row"><span className="k">持ち物</span>{e.items.join("、")}</div>
+                {e.note && <p className="entry-note">※{e.note}</p>}
+              </div>
+            ))}
+          </div>
+          <ul className="rule-list" style={{ ["--dot" as string]: "var(--f-pink)" }}>
+            <li>入場料は無料です。各企画は個別に料金が発生する場合があります。</li>
+            <li>来校方法（駅からのバス時刻表等）の詳細は学校公式サイトをご確認ください。</li>
+          </ul>
+        </div>
+
         {RULES.map((group) => (
-          <div
-            key={group.title}
-            id={group.title === "入場について" ? "entry" : undefined}
-            className="fcard rule-group"
-            style={group.title === "入場について" ? { scrollMarginTop: 84 } : undefined}
-          >
+          <div key={group.title} className="fcard rule-group">
             <p className="rule-group-title">
               <span className="ico">{group.emoji}</span>
               {group.title}
