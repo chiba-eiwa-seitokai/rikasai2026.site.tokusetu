@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
       select: { id: true, sortOrder: true },
     });
     const existingIds = new Set(existing.map((event) => event.id));
-    for (const id of ids) {
+    for (const id of Array.from(ids)) {
       if (!existingIds.has(id)) errors.push(`ID ${id} は現在の企画一覧にありません`);
     }
 
