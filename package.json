@@ -10,6 +10,7 @@
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:seed": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' prisma/seed.ts",
+    "db:sync-events": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' scripts/sync-portal-events.ts",
     "db:push": "prisma db push"
   },
   "dependencies": {
