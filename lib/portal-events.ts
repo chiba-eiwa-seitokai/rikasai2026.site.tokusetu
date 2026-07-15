@@ -70,6 +70,7 @@ export const PORTAL_EVENTS: PortalEvent[] = [
     desc: "お菓子の家のような空間でアイロンビーズ制作ができます！ぜひ来てください！",
     tags: ["アイロンビーズ", "工作", "フォトスポット"],
     info: [{ k: "場所", v: "2-4教室" }, { k: "営業時間", v: "9:00-14:00" }],
+    imageUrl: "/events/pamphlet/class-2-4.webp",
     day1: true,
     day2: true,
   },
