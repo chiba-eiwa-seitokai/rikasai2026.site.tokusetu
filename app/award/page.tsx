@@ -105,7 +105,7 @@ export default function AwardPage() {
         </section>
 
         <section className="fsect">
-          <p className="fsect-title">メダル賞 <span className="en">GOLD / SILVER / BRONZE</span></p>
+          <p className="fsect-title">総合賞 <span className="en">GOLD / SILVER / BRONZE</span></p>
           <div className="medal-grid">
             {MEDAL_AWARDS.map((award) => (
               <div
@@ -122,7 +122,7 @@ export default function AwardPage() {
           <p className="medal-desc">全クラスを対象に、投票結果からゴールド・シルバー・ブロンズの3賞を決定します。</p>
           <div className="exclusion-note">
             <span>※</span>
-            <span>メダル賞に選ばれた団体は、アトラクション賞および飲食賞の対象から外れます。</span>
+            <span>総合賞に選ばれた団体は、アトラクション賞および飲食賞の対象から外れます。</span>
           </div>
         </section>
 
@@ -155,7 +155,7 @@ export default function AwardPage() {
               <p className="vote-period-label">VOTING PERIOD</p>
               <p className="vote-period-date">7月17日（金）・18日（土）</p>
             </div>
-            <p className="vote-period-note">梨花祭開催中の2日間<br />在校生による紙投票</p>
+            <p className="vote-period-note">梨花祭開催中の2日間<br />在校生・来校者による紙投票</p>
           </div>
           <div className="steps">
             {VOTING_STEPS.map((step) => (
