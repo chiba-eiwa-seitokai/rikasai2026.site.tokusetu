@@ -15,7 +15,7 @@ export default function MapPage() {
       <div className="fbody">
         <div className="map-img-wrap">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/map.png" alt="梨花祭2026 会場マップ" />
+          <img src="/map.webp" alt="梨花祭2026 会場マップ" />
         </div>
       </div>
     </div>
