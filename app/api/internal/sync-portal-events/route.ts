@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { syncPortalEvents } from "@/lib/portal-events";
 
-const TOKEN_HASH = "a7ea42a4dd190b0c59dd65a61d40941f6808e0c475bc7e713b465865711acd43";
+const TOKEN_HASH = "cf7df04ecd533f39f6962dc1da2005a09769462c66343bafea3336208b89bc74";
 
 function isAuthorized(request: NextRequest): boolean {
   const token = request.headers.get("x-sync-token") ?? "";
