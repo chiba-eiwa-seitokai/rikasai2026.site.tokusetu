@@ -66,46 +66,41 @@ export async function POST(request: NextRequest) {
     }
 
     let nextSortOrder = Math.max(34, ...existing.map((event) => event.sortOrder)) + 1;
-    let created = 0;
-    let updated = 0;
+    const created = events.filter((event) => !event.id).length;
+    const updated = events.length - created;
 
-    await prisma.$transaction(async (tx) => {
-      for (const event of events) {
-        const isExisting = Boolean(event.id);
-        const data = {
-          num: cleanText(event.num),
-          grade: cleanText(event.grade),
-          title: cleanText(event.title),
-          type: cleanText(event.type),
-          emoji: cleanText(event.emoji) || "🎉",
-          desc: typeof event.desc === "string" ? event.desc.trim() : "",
-          tags: JSON.stringify(Array.isArray(event.tags) ? event.tags.map(cleanText).filter(Boolean) : []),
-          infoJson: JSON.stringify(
-            (Array.isArray(event.info) ? event.info : [])
-              .map((item, index) => ({
-                k: cleanText(item.k) || (cleanText(item.v) && index === 0 ? "場所" : ""),
-                v: cleanText(item.v),
-              }))
-              .filter((item) => item.k && item.v)
-          ),
-          thumbUrl: cleanText(event.thumbUrl) || null,
-          heroImgUrl: cleanText(event.heroImgUrl) || null,
-          galleryJson: JSON.stringify(Array.isArray(event.gallery) ? event.gallery.map(cleanText).filter(Boolean) : []),
-          day1: event.day1 ?? true,
-          day2: event.day2 ?? true,
-          published: event.published ?? true,
-          sortOrder: Number.isFinite(event.sortOrder) ? Number(event.sortOrder) : nextSortOrder++,
-        };
+    const operations = events.map((event) => {
+      const data = {
+        num: cleanText(event.num),
+        grade: cleanText(event.grade),
+        title: cleanText(event.title),
+        type: cleanText(event.type),
+        emoji: cleanText(event.emoji) || "🎉",
+        desc: typeof event.desc === "string" ? event.desc.trim() : "",
+        tags: JSON.stringify(Array.isArray(event.tags) ? event.tags.map(cleanText).filter(Boolean) : []),
+        infoJson: JSON.stringify(
+          (Array.isArray(event.info) ? event.info : [])
+            .map((item, index) => ({
+              k: cleanText(item.k) || (cleanText(item.v) && index === 0 ? "場所" : ""),
+              v: cleanText(item.v),
+            }))
+            .filter((item) => item.k && item.v)
+        ),
+        thumbUrl: cleanText(event.thumbUrl) || null,
+        heroImgUrl: cleanText(event.heroImgUrl) || null,
+        galleryJson: JSON.stringify(Array.isArray(event.gallery) ? event.gallery.map(cleanText).filter(Boolean) : []),
+        day1: event.day1 ?? true,
+        day2: event.day2 ?? true,
+        published: event.published ?? true,
+        sortOrder: Number.isFinite(event.sortOrder) ? Number(event.sortOrder) : nextSortOrder++,
+      };
 
-        if (isExisting) {
-          await tx.event.update({ where: { id: event.id }, data });
-          updated++;
-        } else {
-          await tx.event.create({ data });
-          created++;
-        }
-      }
+      return event.id
+        ? prisma.event.update({ where: { id: event.id }, data })
+        : prisma.event.create({ data });
     });
+
+    await prisma.$transaction(operations);
 
     return NextResponse.json({ created, updated, total: created + updated });
   } catch (err) {
