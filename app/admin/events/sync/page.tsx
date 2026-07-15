@@ -27,7 +27,7 @@ function bool(value: string, fallback: boolean) { return value.trim() ? value.tr
 function split(value: string) { return value.split(";").map((item) => item.trim()).filter(Boolean); }
 
 function parseEvents(text: string): { events: SyncEvent[]; errors: string[] } {
-  const rows = parseCsv(text); if (rows.length < 2) return { events: [], errors: ["ヘッダー行と企画データが必要です"] };
+  const rows = parseCsv(text.replace(/^\uFEFF/, "")); if (rows.length < 2) return { events: [], errors: ["ヘッダー行と企画データが必要です"] };
   const header = rows[0]; const column = (name: string) => header.indexOf(name);
   const required = [HEADERS.id, HEADERS.num, HEADERS.grade, HEADERS.title, HEADERS.type]; const missing = required.filter((name) => column(name) < 0);
   if (missing.length) return { events: [], errors: [`列が見つかりません: ${missing.join(" / ")}`] };
