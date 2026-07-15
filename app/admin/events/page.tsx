@@ -98,7 +98,7 @@ export default function AdminEventsPage() {
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24 }}>
         <h2 style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 28, fontWeight: 300, fontStyle: "italic", color: "var(--gold-light)" }}>企画管理</h2>
         <div style={{ display: "flex", gap: 8 }}>
-          <Link href="/admin/events/import" className="admin-btn" style={{ fontSize: 8, padding: "4px 12px", borderColor: "#444", color: "rgba(232,212,168,0.5)" }}>CSVインポート</Link>
+          <Link href="/admin/events/sync" className="admin-btn admin-btn-gold" style={{ fontSize: 8, padding: "4px 12px" }}>一括同期</Link>\n          <Link href="/admin/events/import" className="admin-btn" style={{ fontSize: 8, padding: "4px 12px", borderColor: "#444", color: "rgba(232,212,168,0.5)" }}>新規CSV</Link>
           <Link href="/admin/events/new" className="admin-btn admin-btn-gold">+ 新規企画</Link>
         </div>
       </div>
