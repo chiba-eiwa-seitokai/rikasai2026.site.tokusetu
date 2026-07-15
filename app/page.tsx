@@ -111,7 +111,8 @@ export default async function Home() {
         .ribbon-wrap { position: relative; text-align: center; margin: 0 auto; }
         .ribbon-wrap span {
           position: absolute; inset: 0; display: flex; align-items: center;
-          justify-content: center; color: #fff; font-weight: 700; padding-bottom: 3px;
+          justify-content: center; color: #fff; font-weight: 700; line-height: 1.2;
+          transform: translateY(-5px); z-index: 1; pointer-events: none;
         }
 
         /* ABOUT */
@@ -299,7 +300,7 @@ export default async function Home() {
           <div className="ribbon-wrap" style={{ width: 320, maxWidth: "80%", margin: "0 auto 32px" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={IMG.ribbon} alt="" style={{ width: "100%", display: "block" }} />
-            <span style={{ fontSize: 20, letterSpacing: ".14em", paddingBottom: 4 }}>イベント・企画</span>
+            <span style={{ fontSize: 20, letterSpacing: ".14em" }}>イベント・企画</span>
           </div>
           <div className="cards-3">
             <div className="card">
