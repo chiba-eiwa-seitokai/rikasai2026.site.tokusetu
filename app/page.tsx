@@ -284,7 +284,7 @@ export default async function Home() {
               <div className="ribbon-wrap" style={{ width: 150, marginBottom: 20 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={IMG.ribbon2} alt="" style={{ width: 150, display: "block" }} />
-                <span style={{ fontSize: 16 }}>楽しみ方</span>
+                <span style={{ fontSize: 16, transform: "translate(2px, -4px)" }}>楽しみ方</span>
               </div>
               <p>グルメやグッズも充実！<br />友達や家族と一緒に楽しもう！</p>
             </div>
@@ -351,7 +351,7 @@ export default async function Home() {
               <div className="ribbon-wrap" style={{ width: 190, margin: "0 auto 22px" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={IMG.schedBanner} alt="" style={{ width: "100%", display: "block" }} />
-                <span style={{ fontSize: 15 }}>タイムスケジュール</span>
+                <span style={{ fontSize: 15, transform: "translate(2px, -7px)" }}>タイムスケジュール</span>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                 {[
@@ -375,7 +375,7 @@ export default async function Home() {
               <div className="ribbon-wrap" style={{ width: 180, margin: "0 auto 22px" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={IMG.accessBanner} alt="" style={{ width: "100%", display: "block" }} />
-                <span style={{ fontSize: 15 }}>来校方法</span>
+                <span style={{ fontSize: 15, transform: "translate(2px, -6px)" }}>来校方法</span>
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                 {[
