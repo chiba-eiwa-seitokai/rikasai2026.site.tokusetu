@@ -26,7 +26,7 @@ const DAY1 = [
     accent: "var(--f-purple)",
     items: [
       ...CHAPEL_PROGRAM,
-      { time: "14:00〜18:00", name: "生徒会（中夜祭）", detail: "1日目のみ・生徒のみ参加可能" },
+      { time: "16:00〜17:15", name: "生徒会（中夜祭）", detail: "1日目のみ・生徒のみ参加可能" },
     ],
   },
   { venue: "大体育館", emoji: "🏟️", accent: "var(--f-orange)", items: GYM_PROGRAM },
